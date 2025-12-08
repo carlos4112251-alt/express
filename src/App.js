@@ -8,6 +8,7 @@ import Shop from './pages/Shop';
 import About from './pages/About';
 import Specials from './pages/Specials';
 import Delivery from './pages/Delivery';
+import GoogleReviewPopup from './pages/GoogleReviewPopup';
 import Contact from './pages/Contact';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
@@ -40,6 +41,7 @@ function App() {
                 
               </Routes>
             </main>
+            <GoogleReviewPopup />
             <Footer />
           </div>
         </Router>

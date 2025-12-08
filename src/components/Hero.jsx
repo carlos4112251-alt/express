@@ -69,7 +69,7 @@ const Hero = () => {
           height: '100%',
           backgroundImage: `
             linear-gradient(to bottom, rgba(30, 30, 30, 0.7), rgba(30, 30, 30, 0.3)),
-            url('/images/juice.PNG')
+            url('/images/weees.PNG')
           `,
           backgroundSize: 'cover',
           backgroundPosition: 'center',

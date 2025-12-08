@@ -55,6 +55,12 @@ const Home = () => {
 
   const categories = [
     {
+      name: 'Exotic-Flower',
+      icon: <Spa fontSize="large" />,
+      count: getCategoryCount('Exotic-Flower'),
+      filter: 'Exotic-Flower'
+    },
+    {
       name: 'Flower',
       icon: <Spa fontSize="large" />,
       count: getCategoryCount('flower'),

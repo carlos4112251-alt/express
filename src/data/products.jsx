@@ -1,4 +1,89 @@
 const products = [
+  {
+    id: 28,
+    name: 'Black Hulk',
+    strain: 'Indica',
+    // thcContent: 18,
+    priceOptions: [
+      { option: '1oz', price: 150 },
+      { option: '1/2oz', price: 80 },
+      { option: '1/4oz', price: 50 },
+    ],
+    image: '/images/bmam.png',
+    category: 'Exotic-Flower',
+    isNew: true,
+    description: 'A Indica-dominant with a sweet berry aroma and euphoric effects.',
+    effects: ['Euphoric', 'Creative', 'Energetic'],
+    flavors: ['Blueberry', 'Sweet', 'Herbal']
+  },
+  {
+    id: 29,
+    name: 'Skywalker OG',
+    strain: 'Indica',
+    // thcContent: 18,
+    priceOptions: [
+      { option: '1oz', price: 150 },
+      { option: '1/2oz', price: 80 },
+      { option: '1/4oz', price: 50 },
+    ],
+    image: '/images/icek.png',
+    category: 'Exotic-Flower',
+    isNew: true,
+    description: 'Skywalker OG is an indica-heavy hybrid with a breakdown of around 85% indica to 15% sativa.',
+    effects: ['Euphoric', 'Deep relaxation', 'Pain relief'],
+    flavors: ['Blueberry', 'Sweet', 'Herbal']
+  },
+  {
+    id: 30,
+    name: 'Jungle Cake',
+    strain: 'Hybrid',
+    // thcContent: 18,
+    priceOptions: [
+      { option: '1oz', price: 150 },
+      { option: '1/2oz', price: 80 },
+      { option: '1/4oz', price: 50 },
+    ],
+    image: '/images/phaze.png',
+    category: 'Exotic-Flower',
+    isNew: true,
+    description: 'Jungle Cake is a balanced hybrid strain with sky-high potency, dessert-like flavors, and relaxing yet uplifting effects.',
+    effects: ['Euphoric', 'Creative', 'Energetic'],
+    flavors: ['Blueberry', 'Sweet', 'Herbal']
+  },
+  {
+    id: 31,
+    name: 'Maui',
+    strain: 'Sativa',
+    // thcContent: 18,
+    priceOptions: [
+      { option: '1oz', price: 130 },
+      { option: '1/2oz', price: 70 },
+      { option: '1/4oz', price: 50 },
+    ],
+    image: '/images/pipes.png',
+    category: 'Exotic-Flower',
+    isNew: true,
+    description: 'Maui is a legendary sativa-dominant strain known for its tropical flavors and uplifting effects.',
+    effects: ['Euphoric', 'Creative', 'Energetic'],
+    flavors: ['Blueberry', 'Sweet', 'Herbal']
+  },
+  {
+    id: 32,
+    name: 'GMO Cookies',
+    strain: 'Indica',
+    // thcContent: 18,
+    priceOptions: [
+      { option: '1oz', price: 130 },
+      { option: '1/2oz', price: 70 },
+      { option: '1/4oz', price: 50 },
+    ],
+    image: '/images/placeholder.png',
+    category: 'Exotic-Flower',
+    isNew: true,
+    description: 'GMO Cookie strain is a heavy hitter that is roughly 90% indica and 10% sativa.',
+    effects: ['Euphoric', 'Deep relaxation', 'Pain relief'],
+    flavors: ['Blueberry', 'Sweet', 'Herbal']
+  },
   // Flower (8 products)
   {
     id: 1,

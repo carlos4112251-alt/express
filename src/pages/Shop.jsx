@@ -27,6 +27,12 @@ function Shop() {
             All Products
           </button>
           <button 
+            className={category === 'Exotic-Flower' ? 'active' : ''}
+            onClick={() => setCategory('Exotic-Flower')}
+          >
+            Top Shelf
+          </button>
+          <button 
             className={category === 'flower' ? 'active' : ''}
             onClick={() => setCategory('flower')}
           >
