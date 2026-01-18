@@ -1,4 +1,39 @@
 const products = [
+
+  {
+    id: 29,
+    name: 'Lemon Cherry Gelato',
+    strain: 'Hybrid',
+    // thcContent: 18,
+    priceOptions: [
+      { option: '1oz', price: 180 },
+      { option: '1/2oz', price: 100 },
+      { option: '1/4oz', price: 70 },
+    ],
+    image: '/images/icek.png',
+    category: 'Exotic-Flower',
+    isNew: true,
+    description: 'Lemon Cherry Gelato is an indica-heavy hybrid with a breakdown of around 85% indica to 15% sativa.',
+    effects: ['Euphoric', 'Deep relaxation', 'Pain relief'],
+    flavors: ['Blueberry', 'Sweet', 'Herbal']
+  },
+  {
+    id: 30,
+    name: 'Acapulco Gold',
+    strain: 'Sativa',
+    // thcContent: 18,
+    priceOptions: [
+      { option: '1oz', price: 180 },
+      { option: '1/2oz', price: 100 },
+      { option: '1/4oz', price: 70 },
+    ],
+    image: '/images/icecake.png',
+    category: 'Exotic-Flower',
+    isNew: true,
+    description: 'Acapulco Gold has been likened to dinner at a five-star restaurant. This strain produces effects that are motivating and energizing.',
+    effects: ['Euphoric', 'Creative', 'Energetic'],
+    flavors: ['Blueberry', 'Sweet', 'Herbal']
+  },
   {
     id: 28,
     name: 'Black Hulk',
@@ -17,40 +52,6 @@ const products = [
     flavors: ['Blueberry', 'Sweet', 'Herbal']
   },
   {
-    id: 29,
-    name: 'Skywalker OG',
-    strain: 'Indica',
-    // thcContent: 18,
-    priceOptions: [
-      { option: '1oz', price: 150 },
-      { option: '1/2oz', price: 80 },
-      { option: '1/4oz', price: 50 },
-    ],
-    image: '/images/icek.png',
-    category: 'Exotic-Flower',
-    isNew: true,
-    description: 'Skywalker OG is an indica-heavy hybrid with a breakdown of around 85% indica to 15% sativa.',
-    effects: ['Euphoric', 'Deep relaxation', 'Pain relief'],
-    flavors: ['Blueberry', 'Sweet', 'Herbal']
-  },
-  {
-    id: 30,
-    name: 'Jungle Cake',
-    strain: 'Hybrid',
-    // thcContent: 18,
-    priceOptions: [
-      { option: '1oz', price: 150 },
-      { option: '1/2oz', price: 80 },
-      { option: '1/4oz', price: 50 },
-    ],
-    image: '/images/phaze.png',
-    category: 'Exotic-Flower',
-    isNew: true,
-    description: 'Jungle Cake is a balanced hybrid strain with sky-high potency, dessert-like flavors, and relaxing yet uplifting effects.',
-    effects: ['Euphoric', 'Creative', 'Energetic'],
-    flavors: ['Blueberry', 'Sweet', 'Herbal']
-  },
-  {
     id: 31,
     name: 'Maui',
     strain: 'Sativa',
@@ -62,7 +63,7 @@ const products = [
     ],
     image: '/images/pipes.png',
     category: 'Exotic-Flower',
-    isNew: true,
+    isNew: false,
     description: 'Maui is a legendary sativa-dominant strain known for its tropical flavors and uplifting effects.',
     effects: ['Euphoric', 'Creative', 'Energetic'],
     flavors: ['Blueberry', 'Sweet', 'Herbal']
@@ -79,10 +80,27 @@ const products = [
     ],
     image: '/images/placeholder.png',
     category: 'Exotic-Flower',
-    isNew: true,
+    isNew: false,
     description: 'GMO Cookie strain is a heavy hitter that is roughly 90% indica and 10% sativa.',
     effects: ['Euphoric', 'Deep relaxation', 'Pain relief'],
     flavors: ['Blueberry', 'Sweet', 'Herbal']
+  },
+  {
+    id: 3,
+    name: 'Sour Diesel',
+    strain: 'Sativa',
+    // thcContent: 20,
+    priceOptions: [
+      { option: '1oz', price: 130 },
+      { option: '1/2oz', price: 70 },
+      { option: '1/4oz', price: 50 },
+    ],
+    image: '/images/sdd.png',
+    category: 'Flower',
+    isNew: true,
+    description: 'A potent sativa with diesel-like aroma and energizing effects.',
+    effects: ['Energetic', 'Creative', 'Uplifted'],
+    flavors: ['Diesel', 'Citrus', 'Pungent']
   },
   // Flower (8 products)
   {
@@ -117,23 +135,6 @@ const products = [
     description: 'A classic indica strain with earthy pine aromas and relaxing effects.',
     effects: ['Relaxing', 'Sleepy', 'Happy'],
     flavors: ['Earthy', 'Pine', 'Woody']
-  },
-  {
-    id: 3,
-    name: 'Sour Diesel',
-    strain: 'Sativa',
-    // thcContent: 20,
-    priceOptions: [
-      { option: '1oz', price: 100 },
-      { option: '1/2oz', price: 60 },
-      { option: '1/4oz', price: 40 },
-    ],
-    image: '/images/sdd.png',
-    category: 'Flower',
-    isNew: true,
-    description: 'A potent sativa with diesel-like aroma and energizing effects.',
-    effects: ['Energetic', 'Creative', 'Uplifted'],
-    flavors: ['Diesel', 'Citrus', 'Pungent']
   },
   {
     id: 4,
@@ -200,22 +201,22 @@ const products = [
     effects: ['Creative', 'Focused', 'Uplifted'],
     flavors: ['Pine', 'Spicy', 'Woody']
   },
-  {
-    id: 8,
-    name: 'Wedding Cake',
-    strain: 'Hybrid',
-    // thcContent: 25,
-    priceOptions: [
-      { option: '1oz', price: 100 },
-      { option: '1/2oz', price: 60 },
-      { option: '1/4oz', price: 40 },
-    ],
-    image: '/images/weed.png',
-    category: 'Flower',
-    description: 'A potent hybrid with sweet vanilla flavor and balanced effects.',
-    effects: ['Relaxed', 'Happy', 'Euphoric'],
-    flavors: ['Vanilla', 'Sweet', 'Creamy']
-  },
+  // {
+  //   id: 8,
+  //   name: 'Wedding Cake',
+  //   strain: 'Hybrid',
+  //   // thcContent: 25,
+  //   priceOptions: [
+  //     { option: '1oz', price: 100 },
+  //     { option: '1/2oz', price: 60 },
+  //     { option: '1/4oz', price: 40 },
+  //   ],
+  //   image: '/images/weed.png',
+  //   category: 'Flower',
+  //   description: 'A potent hybrid with sweet vanilla flavor and balanced effects.',
+  //   effects: ['Relaxed', 'Happy', 'Euphoric'],
+  //   flavors: ['Vanilla', 'Sweet', 'Creamy']
+  // },
 
   // Edibles (5 products)
   {
@@ -300,19 +301,19 @@ const products = [
     flavors: ['Dank', 'Pine', 'Citrus'],
     consistency: 'Sauce'
   },
-  {
-    id: 15,
-    name: 'Shatter',
-    strain: '5g shatter',
-    // thcContent: 80,
-    price: 50,
-    image: '/images/shtt.png',
-    category: 'Concentrates',
-    description: 'Glass-like concentrate with high potency and clean flavor.',
-    effects: ['Potent', 'Relaxing', 'Sleepy'],
-    flavors: ['Earthy', 'Sweet', 'Pungent'],
-    consistency: 'Glass-like'
-  },
+  // {
+  //   id: 15,
+  //   name: 'Shatter',
+  //   strain: '5g shatter',
+  //   // thcContent: 80,
+  //   price: 50,
+  //   image: '/images/shtt.png',
+  //   category: 'Concentrates',
+  //   description: 'Glass-like concentrate with high potency and clean flavor.',
+  //   effects: ['Potent', 'Relaxing', 'Sleepy'],
+  //   flavors: ['Earthy', 'Sweet', 'Pungent'],
+  //   consistency: 'Glass-like'
+  // },
 
   // Cartridges (4 products)
   {
@@ -330,15 +331,15 @@ const products = [
   },
   {
     id: 17,
-    name: 'Big Chief',
+    name: 'glo',
     strain: 'Sativa',
     // thcContent: 82,
     price: 30,
-    image: '/images/bigc.png',
+    image: '/images/glo.png',
     category: 'cart',
-    description: 'Big Chief delivers a refreshing and juicy experience, reminiscent of biting into a ripe watermelon.',
+    description: 'Glo Carts delivers a refreshing and juicy experience, reminiscent of biting into a ripe watermelon.',
     effects: ['Energetic', 'Creative', 'Uplifted'],
-    flavors: ['Orange', 'Citrus', 'Tangy'],
+    flavors: ['euphoria', 'Citrus', 'relief', 'relaxation'],
     cartridgeType: '510 Thread'
   },
   {
@@ -371,56 +372,56 @@ const products = [
   // Disposable Carts (4 products)
   {
     id: 20,
-    name: 'Pineapple Express Disposable',
+    name: 'Pack man Disposable',
     strain: 'Sativa',
     // thcContent: 90,
-    price: 35,
-    image: '/images/1gg.png',
+    price: 50,
+    image: '/images/pac.png',
     category: 'disposable-cart',
-    weight: '1g',
-    description: 'Piff 1g Disposable. Piff Exotics Edition variety pack 1 gram disposable, Liquid Diamonds.',
+    weight: '2g',
+    description: '2 grams premium THC + live resin + liquid diamonds.',
     effects: ['Energetic', 'Creative', 'Uplifted'],
     flavors: ['Pineapple', 'Mango', 'Tropical'],
     battery: '300mAh'
   },
   {
     id: 21,
-    name: 'Blueberry Kush Disposable',
+    name: 'Drip Dual Flavor Disposable',
     strain: 'Indica',
     // thcContent: 88,
     price: 50,
-    image: '/images/3gg.png',
+    image: '/images/drip.png',
     category: 'disposable-cart',
-    weight: '3g',
-    description: 'Piff 3g Disposable. Piff Exotics Edition variety pack 1 gram disposable, Liquid Diamonds.',
+    weight: '2g',
+    description: 'Dual flavors in one 2-gram item, giving a smooth interplay of freshness, strength, and diversity of taste.',
     effects: ['Relaxing', 'Sleepy', 'Happy'],
     flavors: ['Blueberry', 'Sweet', 'Earthy'],
     battery: '350mAh'
   },
   {
     id: 22,
-    name: 'Mimosa Disposable',
+    name: 'Raw Garden Disposable',
     strain: 'Sativa',
     // thcContent: 86,
-    price: 35,
-    image: '/images/1gg.png',
+    price: 50,
+    image: '/images/raww.png',
     category: 'disposable-cart',
-    weight: '1g',
-    description: 'Piff 1g Disposable. Piff Exotics Edition variety pack 1 gram disposable, Liquid Diamonds.',
+    weight: '2g',
+    description: 'Raw Garden 2G Disposable offers strong effects cannabinoid concentration and full-spectrum composition.',
     effects: ['Energetic', 'Creative', 'Focused'],
     flavors: ['Orange', 'Citrus', 'Champagne'],
     battery: '300mAh'
   },
   {
     id: 23,
-    name: 'Forbidden Fruit Disposable',
-    strain: 'Indica',
+    name: 'Jeeter Live Resin',
+    strain: 'Sativa',
     // thcContent: 87,
     price: 50,
-    image: '/images/3gg.png',
+    image: '/images/jeee.png',
     category: 'disposable-cart',
-    weight: '3g',
-    description: 'Piff 3g Disposable. Piff Exotics Edition variety pack 1 gram disposable, Liquid Diamonds.',
+    weight: '2g',
+    description: 'Jeeter Live Resin is made from fresh frozen flower that is flash frozen right after harvest to lock in the natural terpenes and cannabinoids.',
     effects: ['Relaxing', 'Euphoric', 'Happy'],
     flavors: ['Tropical', 'Sweet', 'Fruity'],
     battery: '320mAh'
@@ -460,7 +461,7 @@ const products = [
     name: 'Premium Shake - Indica',
     strain: 'Indica',
     weight: '1 oz',
-    price: 60,
+    price: 70,
     image: '/images/shake.png',
     category: 'Shake',
     description: '1 Oz Premium Shake - Indica.',
@@ -470,7 +471,7 @@ const products = [
     name: 'Premium Shake - Sativa',
     strain: 'Sativa',
     weight: '1 oz',
-    price: 60,
+    price: 70,
     image: '/images/shake.png',
     category: 'Shake',
     description: '1 Oz Premium Shake - Sativa.',
