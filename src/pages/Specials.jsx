@@ -97,11 +97,11 @@ const Specials = () => {
           specialPrice = 90;
           originalPrice = product.priceOptions?.find(opt => opt.option === '1oz')?.price || product.price;
         } else if (selectedDeal.id === 2) {
-          // 6 Edible Packs - $16.67 per pack
-          specialPrice = 16.67;
-        } else if (selectedDeal.id === 3) {
-          // 5 Cartridges - $20 per cartridge
+          // 5 Edible Packs - $20 per pack
           specialPrice = 20;
+        } else if (selectedDeal.id === 3) {
+          // 4 Cartridges - $25 per cartridge
+          specialPrice = 25;
         } else if (selectedDeal.id === 4) {
           // 10 Pre-Rolls - $8 per pre-roll
           specialPrice = 8;
@@ -113,41 +113,45 @@ const Specials = () => {
           }
           // Edible keeps its normal price
         } else if (selectedDeal.id === 6) {
-          // 1oz Flower + 1 Edible
+          // 1oz Exotic Flower + 1 Edible
           if (productType === 'flower') {
             const ediblePrice = findProductInDeal(selectedDeal, selectedProducts.edible, 'edible')?.price || 0;
             specialPrice = selectedDeal.price - ediblePrice;
-            originalPrice = product.priceOptions?.price || product.price;
+            originalPrice = product.priceOptions?.find(opt => opt.option === '1oz')?.price || product.price;
           }
           // Edible keeps its normal price
-        } else if (selectedDeal.id === 7) {
-          // 2 Disposable 1g Carts - $30 each
-          specialPrice = 30;
-        } else if (selectedDeal.id === 8) {
-          // 4 Disposable 1g + 1 Edible
-          if (productType === 'disposable') {
-            const ediblePrice = findProductInDeal(selectedDeal, selectedProducts.edible, 'edible')?.price || 0;
-            specialPrice = (selectedDeal.price - ediblePrice) / 4;
-          }
-          // Edible keeps its normal price
-        } else if (selectedDeal.id === 9) {
-          // 2 Disposable 3g Carts - $40 each
+        } else if (selectedDeal.id === 7 || selectedDeal.id === 9) {
+          // 2 Disposable Carts (2g or 3g) - $40 each ($80 total)
           specialPrice = 40;
-        } else if (selectedDeal.id === 10) {
-          // 4 Disposable 3g + 1 Edible
+        } else if (selectedDeal.id === 8) {
+          // 4 Disposable 2g + 1 Edible ($150 total)
           if (productType === 'disposable') {
             const ediblePrice = findProductInDeal(selectedDeal, selectedProducts.edible, 'edible')?.price || 0;
             specialPrice = (selectedDeal.price - ediblePrice) / 4;
           }
-          // Edible keeps its normal price
+        } else if (selectedDeal.id === 10) {
+          // 4 Disposable 3g + 1 Edible ($170 total)
+          if (productType === 'disposable') {
+            const ediblePrice = findProductInDeal(selectedDeal, selectedProducts.edible, 'edible')?.price || 0;
+            specialPrice = (selectedDeal.price - ediblePrice) / 4;
+          }
+        }
+        
+        // Determine the product name for cart display
+        let displayName = product.name;
+        if (selectedDeal.id === 1) {
+          displayName = `${product.name} (${productType === 'flower1' ? 'First Ounce' : 'Second Ounce'})`;
+        } else if (selectedDeal.id === 6 && productType === 'flower') {
+          displayName = `${product.name} (1oz Exotic Flower)`;
         }
         
         addToCart({
           ...product,
+          name: displayName,
           price: specialPrice,
           originalPrice: originalPrice,
-          selectedOption: productType === 'flower' ? { 
-            ...product.priceOptions, 
+          selectedOption: productType === 'flower' || productType === 'flower1' || productType === 'flower2' ? { 
+            option: '1oz',
             price: specialPrice 
           } : undefined,
           special: {
@@ -175,29 +179,40 @@ const Specials = () => {
     setSnackbarOpen(false);
   };
 
-  const renderProductSelector = (productType, label, products, fixedQuantity = null) => (
-    <>
-      <FormControl fullWidth sx={{ mb: 3 }}>
-        <InputLabel>{label}</InputLabel>
-        <Select
-          value={selectedProducts[productType] || ''}
-          onChange={(e) => handleProductChange(productType, e.target.value)}
-          label={label}
-        >
-          <MenuItem value="">
-            <em>Select {label.toLowerCase()}</em>
-          </MenuItem>
-          {products.map(product => (
-            <MenuItem key={product.id} value={product.id}>
-              {product.name} {product.strain && `(${product.strain})`} - ${product.price}
+  const renderProductSelector = (productType, label, products, fixedQuantity = null) => {
+    // Format price display for products with priceOptions
+    const formatPrice = (product) => {
+      if (product.priceOptions && product.priceOptions.length > 0) {
+        const ozPrice = product.priceOptions.find(opt => opt.option === '1oz')?.price;
+        return ozPrice ? `$${ozPrice}` : `$${product.price}`;
+      }
+      return `$${product.price}`;
+    };
+
+    return (
+      <>
+        <FormControl fullWidth sx={{ mb: 3 }}>
+          <InputLabel>{label}</InputLabel>
+          <Select
+            value={selectedProducts[productType] || ''}
+            onChange={(e) => handleProductChange(productType, e.target.value)}
+            label={label}
+          >
+            <MenuItem value="">
+              <em>Select {label.toLowerCase()}</em>
             </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      
-      {renderQuantityControls(productType, `${label} Quantity`, fixedQuantity)}
-    </>
-  );
+            {products.map(product => (
+              <MenuItem key={product.id} value={product.id}>
+                {product.name} {product.strain && `(${product.strain})`} - {formatPrice(product)}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        
+        {renderQuantityControls(productType, `${label} Quantity`, fixedQuantity)}
+      </>
+    );
+  };
 
   const renderQuantityControls = (productType, label, fixedQuantity = null) => {
     if (fixedQuantity !== null) {
@@ -205,7 +220,7 @@ const Specials = () => {
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
           <Typography variant="body2">{label}:</Typography>
           <Typography variant="body2" sx={{ ml: 1, fontWeight: 'bold' }}>
-            {fixedQuantity} (Special Quantity)
+            {fixedQuantity} (Bundle Quantity)
           </Typography>
         </Box>
       );
@@ -217,7 +232,7 @@ const Specials = () => {
         <IconButton 
           size="small" 
           onClick={() => handleQuantityChange(productType, -1)}
-          disabled={quantities[productType] <= 1}
+          disabled={(quantities[productType] || 1) <= 1}
         >
           <Remove />
         </IconButton>
@@ -245,14 +260,14 @@ const Specials = () => {
 
       {/* Category Filter Tabs */}
       <Box sx={{ 
-  borderBottom: 2, 
-  borderColor: 'primary.main', 
-  mb: 4,
-  background: 'linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.05) 100%)',
-  borderRadius: '8px',
-  padding: '16px',
-  boxShadow: '0 4px 12px rgba(76, 175, 80, 0.1)'
-}}>
+        borderBottom: 2, 
+        borderColor: 'primary.main', 
+        mb: 4,
+        background: 'linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(139, 195, 74, 0.05) 100%)',
+        borderRadius: '8px',
+        padding: '16px',
+        boxShadow: '0 4px 12px rgba(76, 175, 80, 0.1)'
+      }}>
         <Tabs
           value={selectedCategory}
           onChange={handleCategoryChange}
@@ -346,57 +361,57 @@ const Specials = () => {
               <Box sx={{ mt: 2 }}>
                 {selectedDeal.id === 1 && (
                   <>
-                    {renderProductSelector('flower1', 'Select First Flower', selectedDeal.products.flower1)}
-                    {renderProductSelector('flower2', 'Select Second Flower', selectedDeal.products.flower2)}
+                    {renderProductSelector('flower1', 'Select First Flower (1oz)', selectedDeal.products.flower1, 1)}
+                    {renderProductSelector('flower2', 'Select Second Flower (1oz)', selectedDeal.products.flower2, 1)}
                   </>
                 )}
                 
                 {selectedDeal.id === 2 && (
-                  renderProductSelector('edible', 'Select Edible', selectedDeal.products.edible, 6)
+                  renderProductSelector('edible', 'Select Edible (5 packs)', selectedDeal.products.edible, 5)
                 )}
                 
                 {selectedDeal.id === 3 && (
-                  renderProductSelector('cart', 'Select Cartridge', selectedDeal.products.cart, 5)
+                  renderProductSelector('cart', 'Select Cartridge (4 carts)', selectedDeal.products.cart, 4)
                 )}
                 
                 {selectedDeal.id === 4 && (
-                  renderProductSelector('preRoll', 'Select Pre-Roll', selectedDeal.products.preRoll, 10)
+                  renderProductSelector('preRoll', 'Select Pre-Roll (10 pack)', selectedDeal.products.preRoll, 10)
                 )}
                 
                 {selectedDeal.id === 5 && (
                   <>
-                    {renderProductSelector('preRoll', 'Select Pre-Roll', selectedDeal.products.preRoll, 20)}
-                    {renderProductSelector('edible', 'Select Edible', selectedDeal.products.edible, 1)}
+                    {renderProductSelector('preRoll', 'Select Pre-Roll (20 pack)', selectedDeal.products.preRoll, 20)}
+                    {renderProductSelector('edible', 'Select Edible (1 pack)', selectedDeal.products.edible, 1)}
                   </>
                 )}
                 
                 {selectedDeal.id === 6 && (
                   <>
-                    {renderProductSelector('flower', 'Select 1oz Flower', selectedDeal.products.flower, 1)}
-                    {renderProductSelector('edible', 'Select Edible', selectedDeal.products.edible, 1)}
+                    {renderProductSelector('flower', 'Select 1oz Exotic Flower', selectedDeal.products.flower, 1)}
+                    {renderProductSelector('edible', 'Select Edible (1 pack)', selectedDeal.products.edible, 1)}
                   </>
                 )}
                 
                 {/* Disposable Deals */}
                 {selectedDeal.id === 7 && (
-                  renderProductSelector('disposable', 'Select Disposable', selectedDeal.products.disposable, 2)
+                  renderProductSelector('disposable', 'Select Disposable (2 x 2g)', selectedDeal.products.disposable, 2)
                 )}
                 
                 {selectedDeal.id === 8 && (
                   <>
-                    {renderProductSelector('disposable', 'Select Disposable', selectedDeal.products.disposable, 4)}
-                    {renderProductSelector('edible', 'Select Edible', selectedDeal.products.edible, 1)}
+                    {renderProductSelector('disposable', 'Select Disposable (4 x 2g)', selectedDeal.products.disposable, 4)}
+                    {renderProductSelector('edible', 'Select Edible (1 pack)', selectedDeal.products.edible, 1)}
                   </>
                 )}
                 
                 {selectedDeal.id === 9 && (
-                  renderProductSelector('disposable', 'Select Disposable', selectedDeal.products.disposable, 2)
+                  renderProductSelector('disposable', 'Select Disposable (2 x 3g)', selectedDeal.products.disposable, 2)
                 )}
                 
                 {selectedDeal.id === 10 && (
                   <>
-                    {renderProductSelector('disposable', 'Select Disposable', selectedDeal.products.disposable, 4)}
-                    {renderProductSelector('edible', 'Select Edible', selectedDeal.products.edible, 1)}
+                    {renderProductSelector('disposable', 'Select Disposable (4 x 3g)', selectedDeal.products.disposable, 4)}
+                    {renderProductSelector('edible', 'Select Edible (1 pack)', selectedDeal.products.edible, 1)}
                   </>
                 )}
               </Box>

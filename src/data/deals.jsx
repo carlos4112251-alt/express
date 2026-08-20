@@ -1,10 +1,11 @@
 import products from './products';
 
-const flowerProducts = products.filter(p => p.category.toLowerCase() === 'flower');
-const edibleProducts = products.filter(p => p.category.toLowerCase() === 'edibles');
-const cartProducts = products.filter(p => p.category.toLowerCase() === 'cart');
-const preRollProducts = products.filter(p => p.category.toLowerCase() === 'pre-rolls');
-const disposableProducts = products.filter(p => p.category.toLowerCase() === 'disposable-cart');
+const flowerProducts = products.filter(p => p.category?.toLowerCase() === 'flower');
+const edibleProducts = products.filter(p => p.category?.toLowerCase() === 'edibles');
+const exProducts = products.filter(p => p.category?.toLowerCase() === 'exotic-flower');
+const cartProducts = products.filter(p => p.category?.toLowerCase() === 'cart');
+const preRollProducts = products.filter(p => p.category?.toLowerCase() === 'pre-rolls');
+const disposableProducts = products.filter(p => p.category?.toLowerCase() === 'disposable-cart');
 
 const deals = [
   {
@@ -30,8 +31,8 @@ const deals = [
   },
   {
     id: 2,
-    name: "6 Edible Packs",
-    description: "Six packs of premium edibles for $100 (save $50+)",
+    name: "5 Edible Packs",
+    description: "5 packs of premium edibles for $100 (save $25)",
     price: 100,
     category: "Bundle", 
     type: "edibles",
@@ -40,17 +41,17 @@ const deals = [
       edible: edibleProducts
     },
     defaultQuantities: {
-      edible: 6
+      edible: 5
     },
-    savingsEstimate: "50+",
-    includes: ["Six packs of assorted edibles"],
+    savingsEstimate: "25",
+    includes: ["5 packs of assorted edibles"],
     effects: ["Relaxed", "Happy", "Uplifted"],
     flavors: ["Mixed flavors"]
   },
   {
     id: 3,
-    name: "5 Cartridges",
-    description: "Five premium cartridges for $100 (save $125+)", 
+    name: "4 Cartridges", 
+    description: "Four premium cartridges for $100 (save $20)",
     price: 100,
     category: "Bundle",
     type: "carts",
@@ -59,17 +60,17 @@ const deals = [
       cart: cartProducts
     },
     defaultQuantities: {
-      cart: 5
+      cart: 4
     },
-    savingsEstimate: "125+",
-    includes: ["Five 510-thread cartridges"],
+    savingsEstimate: "20",
+    includes: ["4 510-thread cartridges"],
     effects: ["Varied based on selection"],
     flavors: ["Varied based on selection"]
   },
   {
     id: 4,
     name: "10 Pre-Rolls",
-    description: "Ten premium pre-rolls for $80 (save $20+)",
+    description: "Ten premium pre-rolls for $80 (save $20)",
     price: 80,
     category: "Bundle",
     type: "pre-rolls", 
@@ -80,7 +81,7 @@ const deals = [
     defaultQuantities: {
       preRoll: 10
     },
-    savingsEstimate: "20+",
+    savingsEstimate: "20",
     includes: ["Ten 1g premium pre-rolls"],
     effects: ["Varied based on selection"],
     flavors: ["Varied based on selection"]
@@ -108,17 +109,14 @@ const deals = [
   },
   {
     id: 6,
-    name: "1oz Flower + 1 Edible",
-    description: "Get any 1oz of flower plus one edible pack for just $100",
-    price: 100,
+    name: "1oz Exotic Flower + 1 Edible",
+    description: "Get any 1oz of Exotic flower plus one edible pack for just $180",
+    price: 180,
     category: "Bundle",
     type: "mixed",
     image: "/images/bundles/starter-bundle.jpg",
     products: {
-      flower: flowerProducts.map(p => ({
-        ...p,
-        priceOptions: p.priceOptions?.find(opt => opt.option === '1oz')
-      })).filter(p => p.priceOptions),
+      flower: exProducts,
       edible: edibleProducts
     },
     defaultQuantities: {
@@ -126,91 +124,91 @@ const deals = [
       edible: 1
     },
     savingsEstimate: "25+",
-    includes: ["One 1oz flower", "One edible pack"],
+    includes: ["One 1oz Exotic flower", "One edible pack"],
     effects: ["Varied based on selection"],
     flavors: ["Varied based on selection"]
   },
-  // New Disposable Deals
   {
     id: 7,
-    name: "2 Disposable 1g Carts",
-    description: "Two 1g disposable vape cartridges for $60 (save $20+)",
-    price: 60,
+    name: "2 Disposable 2g Carts",
+    description: "Two 2g disposable vape cartridges for $80 (save $20)",
+    price: 80,
     category: "Bundle",
     type: "disposable",
     image: "/images/bundles/disposable-bundle.jpg",
     products: {
-      disposable: disposableProducts.filter(p => p.weight === '1g')
+      disposable: disposableProducts.filter(p => p.weight === '2g')
     },
     defaultQuantities: {
       disposable: 2
     },
-    savingsEstimate: "20+",
-    includes: ["Two 1g disposable vapes"],
+    savingsEstimate: "20",
+    includes: ["Two 2g disposable vapes"],
     effects: ["Varied based on selection"],
     flavors: ["Varied based on selection"]
   },
-  {
-    id: 8,
-    name: "4 Disposable 1g + 1 Edible",
-    description: "Four 1g disposable vapes plus one edible pack for $120 (save $40+)",
-    price: 120,
-    category: "Bundle",
-    type: "mixed",
-    image: "/images/bundles/disposable-edible-bundle.jpg",
-    products: {
-      disposable: disposableProducts.filter(p => p.weight === '1g'),
-      edible: edibleProducts
-    },
-    defaultQuantities: {
-      disposable: 4,
-      edible: 1
-    },
-    savingsEstimate: "40+",
-    includes: ["Four 1g disposable vapes", "One edible pack"],
-    effects: ["Varied based on selection"],
-    flavors: ["Varied based on selection"]
-  },
-  {
-    id: 9,
-    name: "2 Disposable 3g Carts",
-    description: "Two 3g disposable vape cartridges for $80 (save $30+)",
-    price: 80,
-    category: "Bundle",
-    type: "disposable",
-    image: "/images/bundles/disposable-3g-bundle.jpg",
-    products: {
-      disposable: disposableProducts.filter(p => p.weight === '3g')
-    },
-    defaultQuantities: {
-      disposable: 2
-    },
-    savingsEstimate: "30+",
-    includes: ["Two 3g disposable vapes"],
-    effects: ["Varied based on selection"],
-    flavors: ["Varied based on selection"]
-  },
-  {
-    id: 10,
-    name: "4 Disposable 3g + 1 Edible",
-    description: "Four 3g disposable vapes plus one edible pack for $160 (save $60+)",
-    price: 160,
-    category: "Bundle",
-    type: "mixed",
-    image: "/images/bundles/disposable-3g-edible-bundle.jpg",
-    products: {
-      disposable: disposableProducts.filter(p => p.weight === '3g'),
-      edible: edibleProducts
-    },
-    defaultQuantities: {
-      disposable: 4,
-      edible: 1
-    },
-    savingsEstimate: "60+",
-    includes: ["Four 3g disposable vapes", "One edible pack"],
-    effects: ["Varied based on selection"],
-    flavors: ["Varied based on selection"]
-  }
+  // },
+  // {
+  //   id: 8,
+  //   name: "4 Disposable 2g Carts + 1 Edible",
+  //   description: "Four 2g disposable vapes and one edible pack for $150",
+  //   price: 150,
+  //   category: "Bundle",
+  //   type: "disposable",
+  //   image: "/images/bundles/disposable-bundle.jpg",
+  //   products: {
+  //     disposable: disposableProducts.filter(p => p.weight === '2g'),
+  //     edible: edibleProducts
+  //   },
+  //   defaultQuantities: {
+  //     disposable: 4,
+  //     edible: 1
+  //   },
+  //   savingsEstimate: "35",
+  //   includes: ["Four 2g disposable vapes", "One edible pack"],
+  //   effects: ["Varied based on selection"],
+  //   flavors: ["Varied based on selection"]
+  // },
+  // {
+  //   id: 9,
+  //   name: "2 Disposable 3g Carts",
+  //   description: "Two 3g disposable vape cartridges for $80 (save $20)",
+  //   price: 80,
+  //   category: "Bundle",
+  //   type: "disposable",
+  //   image: "/images/bundles/disposable-bundle.jpg",
+  //   products: {
+  //     disposable: disposableProducts.filter(p => p.weight === '3g')
+  //   },
+  //   defaultQuantities: {
+  //     disposable: 2
+  //   },
+  //   savingsEstimate: "20",
+  //   includes: ["Two 3g disposable vapes"],
+  //   effects: ["Varied based on selection"],
+  //   flavors: ["Varied based on selection"]
+  // },
+  // {
+  //   id: 10,
+  //   name: "4 Disposable 3g Carts + 1 Edible",
+  //   description: "Four 3g disposable vapes and one edible pack for $170",
+  //   price: 170,
+  //   category: "Bundle",
+  //   type: "disposable",
+  //   image: "/images/bundles/disposable-bundle.jpg",
+  //   products: {
+  //     disposable: disposableProducts.filter(p => p.weight === '3g'),
+  //     edible: edibleProducts
+  //   },
+  //   defaultQuantities: {
+  //     disposable: 4,
+  //     edible: 1
+  //   },
+  //   savingsEstimate: "40",
+  //   includes: ["Four 3g disposable vapes", "One edible pack"],
+  //   effects: ["Varied based on selection"],
+  //   flavors: ["Varied based on selection"]
+  // }
 ];
 
 // Helper function to calculate original price for a deal
@@ -218,15 +216,15 @@ const calculateOriginalPrice = (deal, selections) => {
   if (deal.id === 1) {
     const flower1 = deal.products.flower1.find(p => p.id === selections.flower1);
     const flower2 = deal.products.flower2.find(p => p.id === selections.flower2);
-    const price1 = flower1?.priceOptions?.find(opt => opt.option === '1oz')?.price || 0;
-    const price2 = flower2?.priceOptions?.find(opt => opt.option === '1oz')?.price || 0;
+    const price1 = flower1?.priceOptions?.find(opt => opt.option === '1oz')?.price || flower1?.price || 0;
+    const price2 = flower2?.priceOptions?.find(opt => opt.option === '1oz')?.price || flower2?.price || 0;
     return price1 + price2;
   } else if (deal.id === 2) {
     const edible = deal.products.edible.find(p => p.id === selections.edible);
-    return edible ? edible.price * 6 : 0;
+    return edible ? edible.price * 5 : 0;
   } else if (deal.id === 3) {
     const cart = deal.products.cart.find(p => p.id === selections.cart);
-    return cart ? cart.price * 5 : 0;
+    return cart ? cart.price * 4 : 0;
   } else if (deal.id === 4) {
     const preRoll = deal.products.preRoll.find(p => p.id === selections.preRoll);
     return preRoll ? preRoll.price * 10 : 0;
@@ -237,18 +235,15 @@ const calculateOriginalPrice = (deal, selections) => {
   } else if (deal.id === 6) {
     const flower = deal.products.flower.find(p => p.id === selections.flower);
     const edible = deal.products.edible.find(p => p.id === selections.edible);
-    return (flower ? flower.priceOptions?.price : 0) + (edible ? edible.price : 0);
-  } else if (deal.id === 7) {
+    const flowerPrice = flower 
+      ? flower.priceOptions?.find(opt => opt.option === '1oz')?.price || flower.price || 0
+      : 0;
+    const ediblePrice = edible ? edible.price : 0;
+    return flowerPrice + ediblePrice;
+  } else if (deal.id === 7 || deal.id === 9) {
     const disposable = deal.products.disposable.find(p => p.id === selections.disposable);
     return disposable ? disposable.price * 2 : 0;
-  } else if (deal.id === 8) {
-    const disposable = deal.products.disposable.find(p => p.id === selections.disposable);
-    const edible = deal.products.edible.find(p => p.id === selections.edible);
-    return (disposable ? disposable.price * 4 : 0) + (edible ? edible.price : 0);
-  } else if (deal.id === 9) {
-    const disposable = deal.products.disposable.find(p => p.id === selections.disposable);
-    return disposable ? disposable.price * 2 : 0;
-  } else if (deal.id === 10) {
+  } else if (deal.id === 8 || deal.id === 10) {
     const disposable = deal.products.disposable.find(p => p.id === selections.disposable);
     const edible = deal.products.edible.find(p => p.id === selections.edible);
     return (disposable ? disposable.price * 4 : 0) + (edible ? edible.price : 0);
@@ -265,24 +260,12 @@ const findProductInDeal = (deal, productId, productType) => {
 const isDealSelectionComplete = (deal, selections) => {
   if (deal.id === 1) {
     return selections.flower1 && selections.flower2;
-  } else if (deal.id === 2) {
-    return selections.edible;
-  } else if (deal.id === 3) {
-    return selections.cart;
-  } else if (deal.id === 4) {
-    return selections.preRoll;
-  } else if (deal.id === 5) {
-    return selections.preRoll && selections.edible;
-  } else if (deal.id === 6) {
-    return selections.flower && selections.edible;
-  } else if (deal.id === 7) {
-    return selections.disposable;
-  } else if (deal.id === 8) {
-    return selections.disposable && selections.edible;
-  } else if (deal.id === 9) {
-    return selections.disposable;
-  } else if (deal.id === 10) {
-    return selections.disposable && selections.edible;
+  } else if (deal.id === 2 || deal.id === 3 || deal.id === 4 || deal.id === 7 || deal.id === 9) {
+    const primaryKey = Object.keys(deal.products)[0];
+    return selections[primaryKey];
+  } else if (deal.id === 5 || deal.id === 6 || deal.id === 8 || deal.id === 10) {
+    const keys = Object.keys(deal.products);
+    return selections[keys[0]] && selections[keys[1]];
   }
   return false;
 };
@@ -299,19 +282,17 @@ const getInitialSelections = (deal) => {
 // Helper function to get product label for display
 const getProductLabel = (productType, dealId) => {
   switch(productType) {
-    case 'flower': return '1oz Flower';
-    case 'flower1': return 'First Flower';
-    case 'flower2': return 'Second Flower';
+    case 'flower': return '1oz Exotic Flower';
+    case 'flower1': return 'First Flower (1oz)';
+    case 'flower2': return 'Second Flower (1oz)';
     case 'edible': 
-      return dealId === 2 ? '6 Edible Packs' : '1 Edible Pack';
-    case 'cart': return '5 Cartridges';
+      return dealId === 2 ? '5 Edible Packs' : '1 Edible Pack';
+    case 'cart': return '4 Cartridges';
     case 'preRoll': 
       return dealId === 4 ? '10 Pre-Rolls' : dealId === 5 ? '20 Pre-Rolls' : 'Pre-Rolls';
     case 'disposable':
-      if (dealId === 7) return '2 Disposable 1g Carts';
-      if (dealId === 8) return '4 Disposable 1g Carts';
-      if (dealId === 9) return '2 Disposable 3g Carts';
-      if (dealId === 10) return '4 Disposable 3g Carts';
+      if (dealId === 7 || dealId === 9) return '2 Disposables';
+      if (dealId === 8 || dealId === 10) return '4 Disposables';
       return 'Disposable';
     default: return productType;
   }

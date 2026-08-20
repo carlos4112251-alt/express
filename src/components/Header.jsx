@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { 
+import {
   AppBar,
   Toolbar,
   Typography,
@@ -31,7 +31,6 @@ import {
   LocalMall,
   FavoriteBorder,
   Phone,
-  Whatshot,
   Call,
   Message,
   Close as CloseIcon
@@ -59,12 +58,6 @@ const Header = () => {
   };
 
   const navItems = [
-    { 
-      name: 'Special offer', 
-      path: '/specials',
-      icon: <Whatshot fontSize="small" />,
-      color: 'error.main'
-    },
     { name: 'Home', path: '/' },
     { name: 'Shop', path: '/shop' },
     { name: 'About', path: '/about' },
@@ -107,59 +100,62 @@ const Header = () => {
   };
 
   // Handler for navigation with scroll to top
-  const handleNavigation = (e) => {
+  const handleNavigation = () => {
     scrollToTop();
-    // Close drawer if open
     if (drawerOpen) {
       setDrawerOpen(false);
     }
   };
 
   return (
-    <AppBar position="sticky" sx={{ 
-      backgroundColor: 'white',
-      color: 'text.primary',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+    <AppBar position="sticky" sx={{
+      backgroundColor: '#ffffff',
+      color: '#1f2937',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
     }}>
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+      <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, sm: 3 } }}>
         {/* Logo */}
-        <Typography 
-          variant="h6" 
-          component={Link} 
+        <Typography
+          variant="h6"
+          component={Link}
           to="/"
           onClick={scrollToTop}
-          sx={{ 
-            fontWeight: 700,
-            color: 'primary.main',
+          sx={{
+            fontWeight: 800,
+            color: '#059669',
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
-            mr: 2
+            fontSize: { xs: '1.1rem', sm: '1.25rem' }
           }}
         >
-          <LocalMall sx={{ mr: 1, fontSize: 30 }} />
+          <LocalMall sx={{ mr: 1, fontSize: { xs: 24, sm: 28 }, color: '#059669' }} />
           PotExpress
         </Typography>
 
         {/* Desktop Navigation */}
         {!isMobile && (
-          <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center', gap: 2 }}>
             {navItems.map((item) => (
               <Button
                 key={item.name}
                 component={Link}
                 to={item.path}
                 onClick={scrollToTop}
-                sx={{ 
-                  mx: 1,
-                  color: item.color || 'text.primary',
-                  fontWeight: 500,
+                sx={{
+                  color: '#4b5563',
+                  fontWeight: 600,
+                  fontSize: '0.95rem',
+                  textTransform: 'none',
+                  borderRadius: '8px',
+                  px: 2,
+                  py: 0.8,
+                  transition: 'all 0.2s ease',
                   '&:hover': {
-                    color: item.color ? 'error.dark' : 'primary.main',
-                    backgroundColor: 'transparent'
+                    color: '#059669',
+                    backgroundColor: 'rgba(5, 150, 105, 0.08)'
                   }
                 }}
-                startIcon={item.icon || null}
               >
                 {item.name}
               </Button>
@@ -167,55 +163,72 @@ const Header = () => {
           </Box>
         )}
 
-        {/* Mobile Menu Button */}
-        {isMobile && (
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleDrawer(true)}
-            sx={{ mr: 1 }}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
-
         {/* Action Icons */}
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 } }}>
           {/* Phone Contact Button */}
           <Tooltip title="Contact Us">
-            <IconButton 
-              color="inherit" 
+            <IconButton
               onClick={handlePhoneClick}
-              sx={{ mx: 1 }}
+              sx={{
+                color: '#4b5563',
+                backgroundColor: 'rgba(0, 0, 0, 0.03)',
+                '&:hover': { color: '#059669', backgroundColor: 'rgba(5, 150, 105, 0.08)' }
+              }}
             >
-              <Phone />
+              <Phone fontSize="small" />
             </IconButton>
           </Tooltip>
 
-          <IconButton 
-            color="inherit" 
-            component={Link} 
-            to="/wishlist"
-            onClick={scrollToTop}
-            sx={{ mx: 1 }}
-          >
-            <Badge badgeContent={wishlistCount} color="primary">
-              <FavoriteBorder />
-            </Badge>
-          </IconButton>
-          
-          <IconButton 
-            color="inherit" 
-            component={Link} 
-            to="/cart"
-            onClick={scrollToTop}
-            sx={{ mx: 1 }}
-          >
-            <Badge badgeContent={cartCount} color="primary">
-              <ShoppingCart />
-            </Badge>
-          </IconButton>
+          <Tooltip title="Wishlist">
+            <IconButton
+              component={Link}
+              to="/wishlist"
+              onClick={scrollToTop}
+              sx={{
+                color: '#4b5563',
+                backgroundColor: 'rgba(0, 0, 0, 0.03)',
+                '&:hover': { color: '#059669', backgroundColor: 'rgba(5, 150, 105, 0.08)' }
+              }}
+            >
+              <Badge badgeContent={wishlistCount} color="success" sx={{ '& .MuiBadge-badge': { backgroundColor: '#059669', color: '#fff' } }}>
+                <FavoriteBorder fontSize="small" />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Cart">
+            <IconButton
+              component={Link}
+              to="/cart"
+              onClick={scrollToTop}
+              sx={{
+                color: '#4b5563',
+                backgroundColor: 'rgba(0, 0, 0, 0.03)',
+                '&:hover': { color: '#059669', backgroundColor: 'rgba(5, 150, 105, 0.08)' }
+              }}
+            >
+              <Badge badgeContent={cartCount} color="success" sx={{ '& .MuiBadge-badge': { backgroundColor: '#059669', color: '#fff' } }}>
+                <ShoppingCart fontSize="small" />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+
+          {/* Mobile Menu Button */}
+          {isMobile && (
+            <IconButton
+              color="inherit"
+              aria-label="menu"
+              onClick={toggleDrawer(true)}
+              sx={{
+                color: '#4b5563',
+                backgroundColor: 'rgba(0, 0, 0, 0.03)',
+                ml: 0.5,
+                '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.06)' }
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
         </Box>
       </Toolbar>
 
@@ -226,35 +239,44 @@ const Header = () => {
         onClose={handlePhoneClose}
         PaperProps={{
           sx: {
-            mt: 1,
-            minWidth: 200
+            mt: 1.5,
+            minWidth: 220,
+            borderRadius: '12px',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+            border: '1px solid rgba(0,0,0,0.05)'
           }
         }}
       >
-        <MenuItem onClick={handleCall}>
-          <ListItemIcon>
+        <MenuItem onClick={handleCall} sx={{ py: 1.2, '&:hover': { backgroundColor: 'rgba(5, 150, 105, 0.08)', color: '#059669' } }}>
+          <ListItemIcon sx={{ color: 'inherit' }}>
             <Call fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Call {formattedNumber}</ListItemText>
+          <ListItemText primaryTypographyProps={{ fontWeight: 600, fontSize: '0.9rem' }}>Call {formattedNumber}</ListItemText>
         </MenuItem>
-        
-        <MenuItem onClick={handleText}>
-          <ListItemIcon>
+
+        <MenuItem onClick={handleText} sx={{ py: 1.2, '&:hover': { backgroundColor: 'rgba(5, 150, 105, 0.08)', color: '#059669' } }}>
+          <ListItemIcon sx={{ color: 'inherit' }}>
             <Message fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Text {formattedNumber}</ListItemText>
+          <ListItemText primaryTypographyProps={{ fontWeight: 600, fontSize: '0.9rem' }}>Text {formattedNumber}</ListItemText>
         </MenuItem>
       </Menu>
 
       {/* Text Message Dialog */}
-      <Dialog open={textDialogOpen} onClose={handleCloseTextDialog} maxWidth="sm" fullWidth>
-        <DialogTitle>
-          <Typography variant="h6">Send Text Message</Typography>
+      <Dialog
+        open={textDialogOpen}
+        onClose={handleCloseTextDialog}
+        maxWidth="sm"
+        fullWidth
+        PaperProps={{ sx: { borderRadius: '16px', p: 1 } }}
+      >
+        <DialogTitle sx={{ pb: 1 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>Send Text Message</Typography>
           <Typography variant="body2" color="text.secondary">
             To: {formattedNumber}
           </Typography>
         </DialogTitle>
-        
+
         <DialogContent>
           <TextField
             autoFocus
@@ -268,23 +290,37 @@ const Header = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message here..."
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '10px',
+                '&.Mui-focused fieldset': { borderColor: '#059669' },
+              },
+              '& .MuiInputLabel-root.Mui-focused': { color: '#059669' }
+            }}
           />
         </DialogContent>
-        
-        <DialogActions>
-          <Button onClick={handleCloseTextDialog} startIcon={<CloseIcon />}>
+
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button onClick={handleCloseTextDialog} startIcon={<CloseIcon />} sx={{ color: '#6b7280', fontWeight: 600 }}>
             Cancel
           </Button>
-          <Button 
-            onClick={handleSendText} 
-            variant="contained" 
+          <Button
+            onClick={handleSendText}
+            variant="contained"
             startIcon={<Message />}
             disabled={message.length > 160}
+            sx={{
+              backgroundColor: '#059669',
+              borderRadius: '10px',
+              fontWeight: 700,
+              px: 3,
+              '&:hover': { backgroundColor: '#047857' }
+            }}
           >
             Send Text
           </Button>
         </DialogActions>
-        
+
         {message.length > 0 && (
           <Typography variant="caption" color="text.secondary" sx={{ px: 3, pb: 2 }}>
             Characters: {message.length}/160
@@ -296,103 +332,117 @@ const Header = () => {
       <Drawer
         anchor="right"
         open={drawerOpen}
-        onClose={toggleDrawer(false)}
+        onClose={() => setDrawerOpen(false)}
         sx={{
           '& .MuiDrawer-paper': {
-            width: 250,
-            boxSizing: 'border-box'
+            width: 280,
+            boxSizing: 'border-box',
+            backgroundColor: '#ffffff'
           }
         }}
       >
         <Box
-          sx={{ 
+          sx={{
             display: 'flex',
-            justifyContent: 'flex-end',
-            p: 1 
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            p: 2
           }}
         >
-          <IconButton onClick={toggleDrawer(false)}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 800, color: '#059669' }}>
+            Menu
+          </Typography>
+          <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: '#4b5563' }}>
             <Close />
           </IconButton>
         </Box>
         <Divider />
-        <List>
+
+        {/* Navigation Links */}
+        <List sx={{ px: 1, py: 2 }}>
           {navItems.map((item) => (
-            <ListItem 
-              button 
+            <ListItem
               key={item.name}
               component={Link}
               to={item.path}
-              onClick={(e) => {
-                handleNavigation(e);
-                toggleDrawer(false)();
+              onClick={() => {
+                scrollToTop();
+                setDrawerOpen(false);
               }}
               sx={{
+                borderRadius: '10px',
+                mb: 1,
+                textDecoration: 'none',
                 '&:hover': {
-                  backgroundColor: item.color ? 'error.light' : 'primary.light',
-                  color: item.color ? 'error.dark' : 'primary.main'
+                  backgroundColor: 'rgba(5, 150, 105, 0.08)',
+                  color: '#059669'
                 }
               }}
             >
-              {item.icon && (
-                <Box sx={{ color: item.color, mr: 1 }}>
-                  {item.icon}
-                </Box>
-              )}
-              <ListItemText 
-                primary={item.name} 
-                sx={{ 
-                  color: item.color || 'inherit',
-                  fontWeight: item.color ? 600 : 'normal'
-                }} 
+              <ListItemText
+                primary={item.name}
+                primaryTypographyProps={{ fontWeight: 600, fontSize: '1rem' }}
+                sx={{ color: '#374151' }}
               />
             </ListItem>
           ))}
         </List>
         <Divider />
-        <List>
-          <ListItem 
-            button 
+
+        {/* Utility Links (Wishlist & Cart) */}
+        <List sx={{ px: 1, py: 2 }}>
+          <ListItem
             component={Link}
             to="/wishlist"
-            onClick={(e) => {
-              handleNavigation(e);
-              toggleDrawer(false)();
+            onClick={() => {
+              scrollToTop();
+              setDrawerOpen(false);
+            }}
+            sx={{
+              borderRadius: '10px',
+              mb: 1,
+              textDecoration: 'none',
+              '&:hover': { backgroundColor: 'rgba(5, 150, 105, 0.08)' }
             }}
           >
-            <ListItemText 
+            <ListItemText
               primary={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  Wishlist
-                  <Badge 
-                    badgeContent={wishlistCount} 
-                    color="primary" 
-                    sx={{ ml: 1 }}
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                  <Typography sx={{ fontWeight: 600, color: '#374151' }}>Wishlist</Typography>
+                  <Badge
+                    badgeContent={wishlistCount}
+                    color="success"
+                    sx={{ '& .MuiBadge-badge': { backgroundColor: '#059669', color: '#fff' } }}
                   />
                 </Box>
-              } 
+              }
             />
           </ListItem>
-          <ListItem 
-            button 
+
+          <ListItem
             component={Link}
             to="/cart"
-            onClick={(e) => {
-              handleNavigation(e);
-              toggleDrawer(false)();
+            onClick={() => {
+              scrollToTop();
+              setDrawerOpen(false);
+            }}
+            sx={{
+              borderRadius: '10px',
+              textDecoration: 'none',
+              '&:hover': { backgroundColor: 'rgba(5, 150, 105, 0.08)' }
             }}
           >
-            <ListItemText 
+            <ListItemText
               primary={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  Cart
-                  <Badge 
-                    badgeContent={cartCount} 
-                    color="primary" 
-                    sx={{ ml: 1 }}
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                  <Typography sx={{ fontWeight: 600, color: '#374151' }}>Cart</Typography>
+                  <Badge
+                    badgeContent={cartCount}
+                    color="success"
+                    sx={{ '& .MuiBadge-badge': { backgroundColor: '#059669', color: '#fff' } }}
                   />
                 </Box>
-              } 
+              }
             />
           </ListItem>
         </List>

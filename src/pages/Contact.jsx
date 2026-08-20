@@ -20,7 +20,7 @@ import {
   Email,
   LocationOn,
   Schedule,
-  Message, // Changed from Send to Message
+  Message,
   Facebook,
   Twitter,
   Instagram,
@@ -91,7 +91,6 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    
     {
       icon: <Phone sx={{ fontSize: '2rem' }} />,
       title: 'Phone',
@@ -100,7 +99,6 @@ const Contact = () => {
       action: (content) => handlePhoneClick(content),
       copy: (content) => handleCopyToClipboard(content, 'Phone number')
     },
-    
     {
       icon: <Schedule sx={{ fontSize: '2rem' }} />,
       title: 'Hours',

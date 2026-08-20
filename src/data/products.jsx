@@ -1,8 +1,8 @@
 const products = [
 
   {
-    id: 29,
-    name: 'Lemon Cherry Gelato',
+    id: 1,
+    name: 'Gelato 45',
     strain: 'Hybrid',
     // thcContent: 18,
     priceOptions: [
@@ -13,13 +13,13 @@ const products = [
     image: '/images/icek.png',
     category: 'Exotic-Flower',
     isNew: true,
-    description: 'Lemon Cherry Gelato is an indica-heavy hybrid with a breakdown of around 85% indica to 15% sativa.',
+    description: 'Gelato 45 is an indica-heavy hybrid with a breakdown of around 85% indica to 15% sativa.',
     effects: ['Euphoric', 'Deep relaxation', 'Pain relief'],
-    flavors: ['Blueberry', 'Sweet', 'Herbal']
+    flavors: ['Blueberry', 'Sweet', 'Herbal'],
   },
   {
-    id: 30,
-    name: 'Acapulco Gold',
+    id: 2,
+    name: 'Truffle Pop',
     strain: 'Sativa',
     // thcContent: 18,
     priceOptions: [
@@ -30,29 +30,29 @@ const products = [
     image: '/images/icecake.png',
     category: 'Exotic-Flower',
     isNew: true,
-    description: 'Acapulco Gold has been likened to dinner at a five-star restaurant. This strain produces effects that are motivating and energizing.',
+    description: 'Truffle Pop is a sativa-dominant strain with a sweet, fruity aroma and uplifting effects.',
     effects: ['Euphoric', 'Creative', 'Energetic'],
     flavors: ['Blueberry', 'Sweet', 'Herbal']
   },
   {
-    id: 28,
-    name: 'Black Hulk',
+    id: 3,
+    name: "Dante's Inferno",
     strain: 'Indica',
     // thcContent: 18,
     priceOptions: [
-      { option: '1oz', price: 150 },
-      { option: '1/2oz', price: 80 },
-      { option: '1/4oz', price: 50 },
+      { option: '1oz', price: 180 },
+      { option: '1/2oz', price: 100 },
+      { option: '1/4oz', price: 70 },
     ],
     image: '/images/bmam.png',
     category: 'Exotic-Flower',
     isNew: true,
-    description: 'A Indica-dominant with a sweet berry aroma and euphoric effects.',
+    description: "Dante's Inferno is an indica-dominant strain with a sweet berry aroma and euphoric effects.",
     effects: ['Euphoric', 'Creative', 'Energetic'],
     flavors: ['Blueberry', 'Sweet', 'Herbal']
   },
   {
-    id: 31,
+    id: 4,
     name: 'Maui',
     strain: 'Sativa',
     // thcContent: 18,
@@ -69,7 +69,7 @@ const products = [
     flavors: ['Blueberry', 'Sweet', 'Herbal']
   },
   {
-    id: 32,
+    id: 5,
     name: 'GMO Cookies',
     strain: 'Indica',
     // thcContent: 18,
@@ -86,7 +86,7 @@ const products = [
     flavors: ['Blueberry', 'Sweet', 'Herbal']
   },
   {
-    id: 3,
+    id: 6,
     name: 'Sour Diesel',
     strain: 'Sativa',
     // thcContent: 20,
@@ -96,7 +96,7 @@ const products = [
       { option: '1/4oz', price: 50 },
     ],
     image: '/images/sdd.png',
-    category: 'Flower',
+    category: 'Exotic-Flower',
     isNew: true,
     description: 'A potent sativa with diesel-like aroma and energizing effects.',
     effects: ['Energetic', 'Creative', 'Uplifted'],
@@ -104,14 +104,14 @@ const products = [
   },
   // Flower (8 products)
   {
-    id: 1,
+    id: 7,
     name: 'Blue Dream',
     strain: 'Sativa',
     // thcContent: 18,
     priceOptions: [
-      { option: '1oz', price: 100 },
-      { option: '1/2oz', price: 60 },
-      { option: '1/4oz', price: 40 },
+      { option: '1oz', price: 130 },
+      { option: '1/2oz', price: 70 },
+      { option: '1/4oz', price: 50 },
     ],
     image: '/images/blue.png',
     category: 'Flower',
@@ -121,7 +121,7 @@ const products = [
     flavors: ['Blueberry', 'Sweet', 'Herbal']
   },
   {
-    id: 2,
+    id: 8,
     name: 'OG Kush',
     strain: 'Indica',
     // thcContent: 23,
@@ -137,7 +137,7 @@ const products = [
     flavors: ['Earthy', 'Pine', 'Woody']
   },
   {
-    id: 4,
+    id: 9,
     name: 'Granddaddy Purple',
     strain: 'Indica',
     // thcContent: 22,
@@ -153,7 +153,7 @@ const products = [
     flavors: ['Grape', 'Berry', 'Sweet']
   },
   {
-    id: 5,
+    id: 10,
     name: 'Green Crack',
     strain: 'Sativa',
     // thcContent: 19,
@@ -169,7 +169,7 @@ const products = [
     flavors: ['Mango', 'Citrus', 'Tropical']
   },
   {
-    id: 6,
+    id: 11,
     name: 'Northern Lights',
     strain: 'Indica',
     // thcContent: 21,
@@ -185,7 +185,7 @@ const products = [
     flavors: ['Earthy', 'Sweet', 'Pine']
   },
   {
-    id: 7,
+    id: 12,
     name: 'Jack Herer',
     strain: 'Sativa',
     // thcContent: 18,
@@ -220,7 +220,7 @@ const products = [
 
   // Edibles (5 products)
   {
-    id: 9,
+    id: 13,
     name: 'Trolli Gummi Candy',
     strain: 'Hybrid',
     thcContent: 600 ,
@@ -234,7 +234,7 @@ const products = [
     dosage: '10mg THC per piece'
   },
   {
-    id: 10,
+    id: 14,
     name: 'Hyfly',
     strain: 'Indica',
     thcContent: 600,
@@ -247,7 +247,7 @@ const products = [
     dosage: '5mg THC per piece'
   },
   {
-    id: 11,
+    id: 15,
     name: 'Stony Patch',
     strain: 'Sativa',
     thcContent: 500,
@@ -260,7 +260,7 @@ const products = [
     dosage: '15mg THC per piece'
   },
   {
-    id: 12,
+    id: 16,
     name: 'Peach Gummi',
     strain: 'Hybrid',
     thcContent: 600,
@@ -273,7 +273,7 @@ const products = [
     dosage: '20mg THC per piece'
   },
   {
-    id: 13,
+    id: 17,
     name: 'Sour rings',
     strain: 'Hybrid',
     thcContent: 600,
@@ -289,7 +289,7 @@ const products = [
 
   // Concentrates (2 products)
   {
-    id: 14,
+    id: 18,
     name: 'Tincture',
     strain: '1000MG THC Tincture',
     // thcContent: 50,
@@ -317,7 +317,7 @@ const products = [
 
   // Cartridges (4 products)
   {
-    id: 16,
+    id: 19,
     name: 'Raw Garden',
     strain: 'indica',
     // thcContent: 85,
@@ -330,7 +330,7 @@ const products = [
     cartridgeType: '510 Thread'
   },
   {
-    id: 17,
+    id: 20,
     name: 'glo',
     strain: 'Sativa',
     // thcContent: 82,
@@ -343,7 +343,7 @@ const products = [
     cartridgeType: '510 Thread'
   },
   {
-    id: 18,
+    id: 21,
     name: 'Friendly Farms',
     strain: 'Indica',
     // thcContent: 83,
@@ -356,7 +356,7 @@ const products = [
     cartridgeType: '510 Thread'
   },
   {
-    id: 19,
+    id: 22,
     name: 'Friendly Farms',
     strain: 'Sativa',
     // thcContent: 79,
@@ -369,11 +369,26 @@ const products = [
     cartridgeType: '510 Thread'
   },
 
-  // Disposable Carts (4 products)
+  // Disposable Carts (5 products)
+  ,
   {
-    id: 20,
+    id: 23,
+    name: 'Choice Labs Disposable',
+    strain: '2g dual flavors',
+    // thcContent: 79,
+    price: 50,
+    image: '/images/choice.png',
+    category: 'disposable-cart',
+    weight: '2g',
+    description: '2 grams premium THC + live resin + liquid diamonds.',
+    effects: ['Energetic', 'Creative', 'Uplifted'],
+    flavors: ['Pineapple', 'Mango', 'Tropical'],
+    battery: '300mAh'
+  },
+  {
+    id: 24,
     name: 'Pack man Disposable',
-    strain: 'Sativa',
+    strain: '2g',
     // thcContent: 90,
     price: 50,
     image: '/images/pac.png',
@@ -384,44 +399,44 @@ const products = [
     flavors: ['Pineapple', 'Mango', 'Tropical'],
     battery: '300mAh'
   },
+  // {
+  //   id: 25,
+  //   name: 'Muha Meds Disposable',
+  //   strain: '2g',
+  //   // thcContent: 88,
+  //   price: 50,
+  //   image: '/images/muha.png',
+  //   category: 'disposable-cart',
+  //   weight: '2g',
+  //   description: 'Muha Meds, giving a smooth interplay of freshness, strength, and diversity of taste.',
+  //   effects: ['Relaxing', 'Sleepy', 'Happy'],
+  //   flavors: ['Blueberry', 'Sweet', 'Earthy'],
+  //   battery: '350mAh'
+  // },
   {
-    id: 21,
-    name: 'Drip Dual Flavor Disposable',
-    strain: 'Indica',
-    // thcContent: 88,
-    price: 50,
-    image: '/images/drip.png',
-    category: 'disposable-cart',
-    weight: '2g',
-    description: 'Dual flavors in one 2-gram item, giving a smooth interplay of freshness, strength, and diversity of taste.',
-    effects: ['Relaxing', 'Sleepy', 'Happy'],
-    flavors: ['Blueberry', 'Sweet', 'Earthy'],
-    battery: '350mAh'
-  },
-  {
-    id: 22,
-    name: 'Raw Garden Disposable',
-    strain: 'Sativa',
+    id: 26,
+    name: 'Sluggers Disposable',
+    strain: '2g',
     // thcContent: 86,
     price: 50,
-    image: '/images/raww.png',
+    image: '/images/slag.png',
     category: 'disposable-cart',
     weight: '2g',
-    description: 'Raw Garden 2G Disposable offers strong effects cannabinoid concentration and full-spectrum composition.',
+    description: 'Sluggers 2G Disposable offers strong effects cannabinoid concentration and full-spectrum composition.',
     effects: ['Energetic', 'Creative', 'Focused'],
     flavors: ['Orange', 'Citrus', 'Champagne'],
     battery: '300mAh'
   },
   {
-    id: 23,
-    name: 'Jeeter Live Resin',
-    strain: 'Sativa',
+    id: 27,
+    name: 'Big Chief DUO Disposable',
+    strain: '2g dual flavors',
     // thcContent: 87,
     price: 50,
-    image: '/images/jeee.png',
+    image: '/images/big.png',
     category: 'disposable-cart',
     weight: '2g',
-    description: 'Jeeter Live Resin is made from fresh frozen flower that is flash frozen right after harvest to lock in the natural terpenes and cannabinoids.',
+    description: 'Big Chief DUO is made from fresh frozen flower that is flash frozen right after harvest to lock in the natural terpenes and cannabinoids.',
     effects: ['Relaxing', 'Euphoric', 'Happy'],
     flavors: ['Tropical', 'Sweet', 'Fruity'],
     battery: '320mAh'
@@ -429,7 +444,7 @@ const products = [
 
   // Pre-rolls (2 products)
   {
-    id: 24,
+    id: 28,
     name: 'Pre-Roll - Sativa',
     strain: 'Sativa',
     // thcContent: 20,
@@ -443,7 +458,7 @@ const products = [
     quantity: '3 pre-rolls (1g each)'
   },
   {
-    id: 25,
+    id: 29,
     name: 'Pre-Roll - Indica',
     strain: 'Indica',
     weight: '1g',
@@ -457,7 +472,7 @@ const products = [
     quantity: '3 pre-rolls (1g each)'
   },
   {
-    id: 26,
+    id: 30,
     name: 'Premium Shake - Indica',
     strain: 'Indica',
     weight: '1 oz',
@@ -467,7 +482,7 @@ const products = [
     description: '1 Oz Premium Shake - Indica.',
   },
   {
-    id: 27,
+    id: 31,
     name: 'Premium Shake - Sativa',
     strain: 'Sativa',
     weight: '1 oz',

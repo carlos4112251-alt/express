@@ -16,14 +16,16 @@ import {
   Badge,
   Chip,
   useMediaQuery,
-  useTheme
+  useTheme,
+  alpha
 } from '@mui/material';
 import { 
   Delete as DeleteIcon, 
   ShoppingCart as ShoppingCartIcon,
   Add as AddIcon,
   Remove as RemoveIcon,
-  LocalOffer as OfferIcon
+  LocalOffer as OfferIcon,
+  ArrowForward as ArrowForwardIcon
 } from '@mui/icons-material';
 import { useCart } from '../context/CartContext';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
@@ -44,12 +46,11 @@ const Cart = () => {
     savings
   } = useCart();
 
-  // Scroll to top when component mounts
+  // Scroll to top when component mounts or location changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  // Scroll to top function
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -75,46 +76,73 @@ const Cart = () => {
 
   return (
     <Box sx={{ 
-      width: '100vw',
+      width: '100%',
       minHeight: '100vh',
-      margin: 0,
-      padding: 0,
-      backgroundColor: theme.palette.background.default
+      py: isMobile ? 4 : 6,
+      background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%)',
     }}>
       <Box sx={{ 
         maxWidth: 1200, 
         margin: '0 auto', 
-        p: isMobile ? 0 : 3,
-        minHeight: '100vh'
+        px: isMobile ? 2 : 3,
       }}>
-        {/* Header */}
+        {/* Header Section */}
         <Box sx={{ 
-          p: isMobile ? 2 : 0,
-          pb: isMobile ? 1 : 0,
-          backgroundColor: 'background.paper',
-          borderBottom: isMobile ? `1px solid ${theme.palette.divider}` : 'none'
+          mb: 4,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: 2
         }}>
           <Typography 
-            variant={isMobile ? "h6" : "h4"} 
-            gutterBottom 
+            variant={isMobile ? "h5" : "h4"} 
+            component="h1"
             sx={{ 
+              fontWeight: 800,
               display: 'flex', 
               alignItems: 'center', 
-              mb: 2,
-              flexWrap: 'wrap'
+              letterSpacing: '-0.5px'
             }}
           >
-            <Badge badgeContent={cartCount} color="primary" sx={{ mr: 2 }}>
+            <Badge badgeContent={cartCount} color="primary" sx={{ mr: 2.5 }}>
               <ShoppingCartIcon fontSize={isMobile ? "medium" : "large"} />
             </Badge>
             Your Shopping Cart
           </Typography>
+
+          {cart.items.length > 0 && (
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={clearCart}
+              startIcon={<DeleteIcon />}
+              size="small"
+              sx={{ borderRadius: 2, fontWeight: 600 }}
+            >
+              Clear Cart
+            </Button>
+          )}
         </Box>
 
         {cart.items.length === 0 ? (
-          <Box textAlign="center" py={8} px={2}>
-            <Typography variant="h6" gutterBottom>
+          <Paper 
+            elevation={0}
+            sx={{ 
+              textAlign: 'center', 
+              py: 8, 
+              px: 3, 
+              borderRadius: 4,
+              boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+              background: '#ffffff'
+            }}
+          >
+            <ShoppingCartIcon sx={{ fontSize: 64, color: 'text.secondary', opacity: 0.4, mb: 2 }} />
+            <Typography variant="h5" fontWeight={700} gutterBottom>
               Your cart is empty
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 4, maxWidth: 400, mx: 'auto' }}>
+              Looks like you haven't added anything to your cart yet. Explore our menu to find top-quality products.
             </Typography>
             <Button
               variant="contained"
@@ -122,37 +150,42 @@ const Cart = () => {
               component={RouterLink}
               to="/shop"
               onClick={scrollToTop}
-              sx={{ mt: 2 }}
               startIcon={<ShoppingCartIcon />}
-              size={isMobile ? "medium" : "large"}
-              fullWidth={isMobile}
+              size="large"
+              sx={{ 
+                borderRadius: 3,
+                px: 4,
+                py: 1.5,
+                fontWeight: 700,
+                boxShadow: '0 4px 14px rgba(76, 175, 80, 0.3)'
+              }}
             >
-              Browse Products
+              Browse Menu
             </Button>
-          </Box>
+          </Paper>
         ) : (
-          <Grid container spacing={0}>
-            <Grid item xs={12} md={8} sx={{ 
-              pr: isMobile ? 0 : 2,
-              pb: isMobile ? 2 : 0
-            }}>
+          <Grid container spacing={4}>
+            {/* Cart Items List */}
+            <Grid item xs={12} md={8}>
               <Paper 
-                elevation={isMobile ? 0 : 2} 
+                elevation={0}
                 sx={{ 
-                  p: isMobile ? 2 : 2,
-                  borderRadius: isMobile ? 0 : 1,
-                  minHeight: isMobile ? 'auto' : '100%'
+                  p: isMobile ? 2 : 3, 
+                  borderRadius: 4,
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+                  background: '#ffffff'
                 }}
               >
                 <List sx={{ p: 0 }}>
-                  {cart.items.map((item) => (
+                  {cart.items.map((item, index) => (
                     <React.Fragment key={`${item.id}-${item.selectedOption?.option || 'default'}`}>
                       <ListItem
                         sx={{
                           flexDirection: isMobile ? 'column' : 'row',
                           alignItems: isMobile ? 'flex-start' : 'center',
-                          padding: isMobile ? '16px 0' : '16px 8px',
-                          width: '100%'
+                          padding: '16px 0',
+                          width: '100%',
+                          position: 'relative'
                         }}
                         secondaryAction={
                           <IconButton
@@ -163,7 +196,8 @@ const Cart = () => {
                             sx={{ 
                               position: isMobile ? 'absolute' : 'static',
                               right: isMobile ? 0 : 'auto',
-                              top: isMobile ? 8 : 'auto'
+                              top: isMobile ? 12 : 'auto',
+                              '&:hover': { backgroundColor: alpha(theme.palette.error.main, 0.1) }
                             }}
                           >
                             <DeleteIcon fontSize={isMobile ? "small" : "medium"} />
@@ -171,59 +205,63 @@ const Cart = () => {
                         }
                       >
                         <ListItemAvatar sx={{ 
-                          minWidth: isSmallMobile ? 50 : 60,
-                          mr: isMobile ? 1 : 2
+                          minWidth: isSmallMobile ? 60 : 75,
+                          mr: 2
                         }}>
                           <Avatar
                             alt={item.name}
                             src={item.image}
-                            variant="square"
+                            variant="rounded"
                             sx={{ 
-                              width: isSmallMobile ? 50 : 60, 
-                              height: isSmallMobile ? 50 : 60
+                              width: isSmallMobile ? 60 : 75, 
+                              height: isSmallMobile ? 60 : 75,
+                              borderRadius: 2,
+                              backgroundColor: '#e0e0e0'
                             }}
                           />
                         </ListItemAvatar>
                         
                         <ListItemText
                           primary={
-                            <Box>
+                            <Box sx={{ pr: isMobile ? 4 : 0 }}>
                               <Typography 
-                                variant={isMobile ? "body1" : "h6"} 
+                                variant={isMobile ? "subtitle1" : "h6"} 
                                 component="div"
                                 sx={{ 
                                   lineHeight: 1.2,
-                                  fontWeight: isMobile ? 600 : 700
+                                  fontWeight: 700,
+                                  mb: 0.5
                                 }}
                               >
                                 {item.name}
                               </Typography>
                               {hasDiscount(item) && (
                                 <Chip
-                                  icon={<OfferIcon />}
+                                  icon={<OfferIcon sx={{ fontSize: '0.9rem !important' }} />}
                                   label={`Save $${((item.originalPrice - item.price) * item.quantity).toFixed(2)}`}
                                   color="success"
                                   size="small"
                                   sx={{ 
-                                    mt: 0.5, 
-                                    fontSize: isSmallMobile ? '0.65rem' : '0.75rem',
-                                    height: isSmallMobile ? 20 : 24
+                                    fontWeight: 600,
+                                    fontSize: '0.7rem',
+                                    height: 22,
+                                    borderRadius: 1.5
                                   }}
                                 />
                               )}
                             </Box>
                           }
                           secondary={
-                            <>
+                            <Box sx={{ mt: 1 }}>
                               {item.selectedOption?.option && (
-                                <Typography variant="body2" component="div" sx={{ mt: 0.5 }}>
-                                  Size: {item.selectedOption.option}
+                                <Typography variant="body2" color="text.secondary" fontWeight={500}>
+                                  Size/Option: <strong>{item.selectedOption.option}</strong>
                                 </Typography>
                               )}
                               <Box sx={{ 
                                 display: 'flex', 
                                 alignItems: 'center', 
-                                gap: 0.5, 
+                                gap: 1, 
                                 mt: 0.5,
                                 flexWrap: 'wrap'
                               }}>
@@ -232,33 +270,22 @@ const Cart = () => {
                                     <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through' }}>
                                       ${item.originalPrice.toFixed(2)}
                                     </Typography>
-                                    <Typography variant="body2" color="success.main" fontWeight="bold">
+                                    <Typography variant="body2" color="success.main" fontWeight="700">
                                       ${item.price.toFixed(2)} each
                                     </Typography>
                                   </>
                                 ) : (
-                                  <Typography variant="body2">
+                                  <Typography variant="body2" color="text.secondary" fontWeight={500}>
                                     ${item.price.toFixed(2)} each
                                   </Typography>
                                 )}
                               </Box>
-                              {item.thcContent && (
-                                <Chip 
-                                  label={`${item.thcContent}Mg THC`} 
-                                  size="small" 
-                                  sx={{ 
-                                    mt: 0.5,
-                                    fontSize: isSmallMobile ? '0.65rem' : '0.75rem',
-                                    height: isSmallMobile ? 20 : 24
-                                  }}
-                                />
-                              )}
-                            </>
+                            </Box>
                           }
                           sx={{ 
                             flex: 1,
-                            mr: isMobile ? 0 : 2,
-                            mb: isMobile ? 1 : 0
+                            mr: isMobile ? 0 : 3,
+                            mb: isMobile ? 2 : 0
                           }}
                         />
                         
@@ -267,161 +294,152 @@ const Cart = () => {
                           alignItems: 'center', 
                           width: isMobile ? '100%' : 'auto',
                           justifyContent: isMobile ? 'space-between' : 'flex-start',
-                          mt: isMobile ? 1 : 0,
-                          gap: isMobile ? 1 : 0
+                          mt: isMobile ? 1.5 : 0,
+                          pt: isMobile ? 1.5 : 0,
+                          borderTop: isMobile ? `1px dashed ${theme.palette.divider}` : 'none'
                         }}>
+                          {/* Quantity Controls */}
                           <Box sx={{ 
                             display: 'flex', 
                             alignItems: 'center',
-                            order: isMobile ? 2 : 1
+                            backgroundColor: '#f1f3f5',
+                            borderRadius: 2,
+                            p: 0.5
                           }}>
                             <IconButton 
                               onClick={() => decrementQuantity(item)}
                               disabled={item.quantity <= 1}
-                              size={isSmallMobile ? "small" : "medium"}
-                              sx={{ p: isSmallMobile ? 0.5 : 1 }}
+                              size="small"
+                              sx={{ p: 0.5 }}
                             >
-                              <RemoveIcon fontSize={isSmallMobile ? "small" : "medium"} />
+                              <RemoveIcon fontSize="small" />
                             </IconButton>
+                            
                             <TextField
                               size="small"
                               type="number"
                               value={item.quantity}
-                              onChange={(e) =>
-                                handleQuantityChange(item.id, item.selectedOption, e.target.value)
-                              }
+                              onChange={(e) => handleQuantityChange(item.id, item.selectedOption, e.target.value)}
                               inputProps={{ 
                                 min: 1,
                                 max: 99,
                                 style: { 
                                   textAlign: 'center',
-                                  padding: isSmallMobile ? '2px' : '6px',
-                                  fontSize: isSmallMobile ? '0.8rem' : '0.9rem'
+                                  padding: '2px',
+                                  fontWeight: 600,
+                                  fontSize: '0.9rem'
                                 }
                               }}
                               sx={{ 
-                                width: isSmallMobile ? 45 : 55, 
-                                mx: 0.5,
-                                '& .MuiInputBase-root': {
-                                  height: isSmallMobile ? 30 : 36
+                                width: 45,
+                                '& .MuiOutlinedInput-root': {
+                                  '& fieldset': { border: 'none' },
                                 }
                               }}
                             />
+                            
                             <IconButton 
                               onClick={() => incrementQuantity(item)}
-                              size={isSmallMobile ? "small" : "medium"}
-                              sx={{ p: isSmallMobile ? 0.5 : 1 }}
+                              size="small"
+                              sx={{ p: 0.5 }}
                             >
-                              <AddIcon fontSize={isSmallMobile ? "small" : "medium"} />
+                              <AddIcon fontSize="small" />
                             </IconButton>
                           </Box>
                           
+                          {/* Item Subtotal */}
                           <Typography 
-                            variant={isMobile ? "body1" : "h6"} 
-                            fontWeight="bold" 
+                            variant="subtitle1" 
+                            fontWeight="800" 
+                            color="primary.main"
                             sx={{ 
-                              ml: isMobile ? 0 : 2,
-                              minWidth: isMobile ? 50 : 70,
-                              textAlign: isMobile ? 'right' : 'right',
-                              order: isMobile ? 1 : 2,
-                              fontSize: isSmallMobile ? '0.9rem' : '1rem'
+                              ml: isMobile ? 0 : 3,
+                              minWidth: 70,
+                              textAlign: 'right'
                             }}
                           >
                             ${(item.price * item.quantity).toFixed(2)}
                           </Typography>
                         </Box>
                       </ListItem>
-                      <Divider sx={{ my: 1 }} />
+                      {index < cart.items.length - 1 && <Divider sx={{ my: 1 }} />}
                     </React.Fragment>
                   ))}
                 </List>
-                
-                <Box sx={{ 
-                  display: 'flex', 
-                  justifyContent: 'flex-end', 
-                  mt: 2,
-                  pt: 1,
-                  borderTop: `1px solid ${theme.palette.divider}`
-                }}>
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    onClick={clearCart}
-                    startIcon={<DeleteIcon />}
-                    size={isMobile ? "small" : "medium"}
-                  >
-                    Clear Entire Cart
-                  </Button>
-                </Box>
               </Paper>
             </Grid>
             
-            <Grid item xs={12} md={4} sx={{ 
-              pl: isMobile ? 0 : 2,
-              pt: isMobile ? 0 : 0
-            }}>
+            {/* Order Summary Sidebar */}
+            <Grid item xs={12} md={4}>
               <Paper 
-                elevation={isMobile ? 2 : 3} 
+                elevation={0}
                 sx={{ 
-                  p: isMobile ? 2 : 3,
-                  borderRadius: isMobile ? 0 : 1,
-                  position: isMobile ? 'sticky' : 'static',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  zIndex: 1000
+                  p: 3, 
+                  borderRadius: 4,
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+                  background: '#ffffff',
+                  position: { md: 'sticky' },
+                  top: { md: 24 }
                 }}
               >
-                <Typography variant="h6" gutterBottom sx={{ fontSize: isMobile ? '1.1rem' : '1.25rem' }}>
+                <Typography variant="h6" fontWeight={800} gutterBottom sx={{ mb: 2 }}>
                   Order Summary
                 </Typography>
                 
                 {savings > 0 && (
                   <Box sx={{ 
-                    backgroundColor: 'success.light', 
-                    color: 'success.contrastText', 
-                    p: 1, 
-                    borderRadius: 1, 
-                    mb: 2,
+                    backgroundColor: alpha(theme.palette.success.main, 0.1), 
+                    color: theme.palette.success.dark, 
+                    p: 1.5, 
+                    borderRadius: 2, 
+                    mb: 3,
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 0.5,
-                    fontSize: isSmallMobile ? '0.75rem' : '0.85rem'
+                    gap: 1
                   }}>
                     <OfferIcon fontSize="small" />
-                    <Typography variant="body2" fontWeight="bold">
-                      You saved ${savings.toFixed(2)}!
+                    <Typography variant="body2" fontWeight="700">
+                      You are saving ${savings.toFixed(2)} on this order!
                     </Typography>
                   </Box>
                 )}
                 
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography variant={isSmallMobile ? "body2" : "body1"}>
-                    Subtotal ({cartCount} items):
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
+                  <Typography variant="body1" color="text.secondary">
+                    Subtotal ({cartCount} items)
                   </Typography>
-                  <Typography variant={isSmallMobile ? "body2" : "body1"}>
+                  <Typography variant="body1" fontWeight={600}>
                     ${cartTotal.toFixed(2)}
                   </Typography>
                 </Box>
                 
                 {savings > 0 && (
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Typography variant={isSmallMobile ? "body2" : "body1"} color="success.main">
-                      Discounts:
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
+                    <Typography variant="body1" color="success.main">
+                      Total Discounts
                     </Typography>
-                    <Typography variant={isSmallMobile ? "body2" : "body1"} color="success.main">
+                    <Typography variant="body1" color="success.main" fontWeight={600}>
                       -${savings.toFixed(2)}
                     </Typography>
                   </Box>
                 )}
+
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1.5 }}>
+                  <Typography variant="body1" color="text.secondary">
+                    Estimated Delivery
+                  </Typography>
+                  <Typography variant="body1" fontWeight={600} color="success.main">
+                    FREE
+                  </Typography>
+                </Box>
                 
                 <Divider sx={{ my: 2 }} />
                 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-                  <Typography variant={isMobile ? "subtitle1" : "h6"} sx={{ fontSize: isMobile ? '1rem' : '1.25rem' }}>
-                    Estimated Total:
+                  <Typography variant="h6" fontWeight={800}>
+                    Estimated Total
                   </Typography>
-                  <Typography variant={isMobile ? "subtitle1" : "h6"} sx={{ fontSize: isMobile ? '1rem' : '1.25rem' }}>
+                  <Typography variant="h6" fontWeight={800} color="primary.main">
                     ${cartTotal.toFixed(2)}
                   </Typography>
                 </Box>
@@ -430,13 +448,17 @@ const Cart = () => {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  size={isMobile ? "medium" : "large"}
+                  size="large"
                   component={RouterLink}
                   to="/checkout"
                   onClick={scrollToTop}
+                  endIcon={<ArrowForwardIcon />}
                   sx={{ 
-                    py: isMobile ? 1.25 : 1.5,
-                    fontSize: isMobile ? '0.9rem' : '1rem'
+                    py: 1.5,
+                    fontWeight: 700,
+                    borderRadius: 3,
+                    boxShadow: '0 4px 14px rgba(76, 175, 80, 0.3)',
+                    mb: 1.5
                   }}
                 >
                   Proceed to Checkout
@@ -445,15 +467,21 @@ const Cart = () => {
                 <Button
                   fullWidth
                   variant="outlined"
-                  color="primary"
+                  color="inherit"
                   component={RouterLink}
                   to="/shop"
                   onClick={scrollToTop}
-                  size={isMobile ? "medium" : "large"}
+                  size="large"
                   sx={{ 
-                    mt: 1.5, 
-                    py: isMobile ? 1.25 : 1.5,
-                    fontSize: isMobile ? '0.9rem' : '1rem'
+                    py: 1.5,
+                    fontWeight: 600,
+                    borderRadius: 3,
+                    color: 'text.secondary',
+                    borderColor: 'divider',
+                    '&:hover': {
+                      borderColor: 'text.primary',
+                      backgroundColor: 'transparent'
+                    }
                   }}
                 >
                   Continue Shopping

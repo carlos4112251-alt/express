@@ -13,8 +13,7 @@ import {
 import {
   ShoppingCart,
   ExpandMore,
-  Whatshot,
-  KeyboardArrowUp
+  Whatshot
 } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -34,15 +33,14 @@ const Hero = () => {
     if (featuredSection) {
       featuredSection.scrollIntoView({ behavior: 'smooth' });
     } else {
-      // Fallback: scroll down by viewport height
       window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
     }
   };
 
   const features = [
-    { icon: '🌿', text: 'Organic Products' },
+    { icon: '🌿', text: 'Organic Quality' },
     { icon: '🚚', text: '1-Hour Delivery' },
-    { icon: '🔒', text: 'Secure Checkout' }
+    { icon: '🔒', text: 'Secure I-71' }
   ];
 
   return (
@@ -50,16 +48,16 @@ const Hero = () => {
       component="section"
       sx={{
         position: 'relative',
-        height: { xs: '90vh', sm: '95vh', md: '100vh' },
-        minHeight: { xs: 500, sm: 600, md: 700 },
-        maxHeight: { xs: 900, md: 1200 },
+        height: { xs: '88vh', sm: '92vh', md: '100vh' },
+        minHeight: { xs: 520, sm: 600, md: 700 },
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        bgcolor: 'background.default',
+        // Matches the clean white / light theme foundation of the Header
+        bgcolor: '#ffffff',
       }}
     >
-      {/* Background with gradient overlay */}
+      {/* Background with a softer, lighter gradient overlay matching the header's crisp design */}
       <Box
         sx={{
           position: 'absolute',
@@ -68,7 +66,7 @@ const Hero = () => {
           width: '100%',
           height: '100%',
           backgroundImage: `
-            linear-gradient(to bottom, rgba(30, 30, 30, 0.7), rgba(30, 30, 30, 0.3)),
+            linear-gradient(to bottom, rgba(31, 41, 55, 0.75), rgba(17, 24, 39, 0.65)),
             url('/images/weees.PNG')
           `,
           backgroundSize: 'cover',
@@ -78,25 +76,29 @@ const Hero = () => {
       />
 
       {/* Content */}
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, py: { xs: 4, md: 2 } }}>
-        <Grid container spacing={isMobile ? 4 : 4} alignItems="center">
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, py: { xs: 2, sm: 4 } }}>
+        <Grid container spacing={3} alignItems="center" justifyContent="center">
           <Grid item xs={12} md={6}>
             <Fade in timeout={800}>
-              <Box sx={{ textAlign: { xs: 'center', md: 'left' }, pr: { md: 2 } }}>
+              <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
                 <Typography
                   variant="overline"
                   component="p"
-                  color="primary.main"
                   sx={{
                     mb: 1,
-                    display: 'block',
-                    fontWeight: 600,
-                    letterSpacing: 2,
-                    fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.8rem' },
-                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                    display: 'inline-block',
+                    fontWeight: 700,
+                    letterSpacing: 2.5,
+                    fontSize: { xs: '0.65rem', sm: '0.75rem' },
+                    // Matches header's emerald badge styling
+                    color: '#059669',
+                    bgcolor: 'rgba(5, 150, 105, 0.15)',
+                    px: 1.5,
+                    py: 0.5,
+                    borderRadius: '6px',
                   }}
                 >
-                  PREMIUM CANNABIS
+                  PREMIUM DC CANNABIS
                 </Typography>
 
                 <Typography
@@ -104,18 +106,15 @@ const Hero = () => {
                   component="h1"
                   sx={{
                     fontWeight: 800,
-                    lineHeight: 1.1,
+                    lineHeight: 1.15,
                     mb: 2,
-                    color: 'common.white',
+                    color: '#ffffff',
                     fontSize: {
-                      xs: '1.6rem',
-                      sm: '2.2rem',
-                      md: '2.5rem',
-                      lg: '2.8rem'
+                      xs: '1.75rem',
+                      sm: '2.4rem',
+                      md: '2.8rem',
                     },
-                    textShadow: '0 2px 4px rgba(0,0,0,0.7)',
-                    wordWrap: 'break-word',
-                    overflowWrap: 'break-word'
+                    textShadow: '0 2px 10px rgba(0,0,0,0.5)',
                   }}
                 >
                   Quality Cannabis Delivered Discreetly
@@ -125,47 +124,48 @@ const Hero = () => {
                   variant="body1"
                   component="p"
                   sx={{
-                    mb: 2,
-                    color: 'rgba(255,255,255,0.9)',
-                    maxWidth: 600,
+                    mb: 3,
+                    color: 'rgba(255,255,255,0.85)',
+                    maxWidth: 540,
                     mx: { xs: 'auto', md: '0' },
-                    fontSize: { xs: '0.9rem', sm: '1rem', md: '1.05rem' },
-                    textShadow: '0 1px 2px rgba(0,0,0,0.5)',
-                    lineHeight: 1.5
+                    fontSize: { xs: '0.875rem', sm: '1rem' },
+                    lineHeight: 1.6,
                   }}
                 >
-                  Discover our exclusive collection flower, edibles, cartages and potent concentrates. We offer fast, reliable local delivery, serving Washington DC in full compliance with I-71.
+                  Discover exclusive flower, edibles, cartridges, and potent concentrates. Fast, reliable local delivery serving Washington DC under full I-71 compliance.
                 </Typography>
 
+                {/* Call To Action Buttons */}
                 <Box sx={{ 
                   display: 'flex', 
-                  gap: 2, 
-                  mb: 4, 
+                  gap: 1.5, 
+                  mb: 3.5, 
                   flexDirection: { xs: 'column', sm: 'row' },
                   justifyContent: { xs: 'center', md: 'flex-start' },
-                  alignItems: 'center'
+                  alignItems: 'stretch'
                 }}>
                   <Button
                     component={RouterLink}
                     to="/shop"
                     variant="contained"
-                    color="primary"
-                    size={isSmallMobile ? 'medium' : 'large'}
+                    size="large"
                     startIcon={<ShoppingCart />}
                     onClick={scrollToTop}
                     sx={{
-                      px: { xs: 3, sm: 4 },
-                      py: 1.5,
+                      py: 1.4,
+                      px: 3,
                       fontWeight: 700,
-                      borderRadius: '12px',
-                      boxShadow: '0 4px 20px rgba(76, 175, 80, 0.3)',
-                      width: { xs: '100%', sm: 'auto' },
-                      transition: 'all 0.3s ease',
+                      borderRadius: '10px',
+                      // Exact Header Emerald primary color match (#059669)
+                      backgroundColor: '#059669',
+                      boxShadow: '0 4px 14px rgba(5, 150, 105, 0.4)',
+                      fontSize: { xs: '0.9rem', sm: '1rem' },
                       '&:hover': {
-                        transform: 'translateY(-3px)',
-                        boxShadow: '0 6px 25px rgba(76, 175, 80, 0.5)',
-                        backgroundColor: '#087f23',
-                      }
+                        backgroundColor: '#047857',
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 6px 20px rgba(5, 150, 105, 0.6)',
+                      },
+                      transition: 'all 0.25s ease',
                     }}
                   >
                     Shop Now
@@ -175,34 +175,34 @@ const Hero = () => {
                     component={RouterLink}
                     to="/specials"
                     variant="outlined"
-                    size={isSmallMobile ? 'medium' : 'large'}
-                    color="inherit"
-                    startIcon={<Whatshot sx={{ color: '#FF6D00' }} />}
+                    size="large"
+                    startIcon={<Whatshot sx={{ color: '#fb923c' }} />}
                     onClick={scrollToTop}
                     sx={{
-                      px: { xs: 3, sm: 4 },
-                      py: 1.5,
+                      py: 1.4,
+                      px: 3,
                       fontWeight: 700,
-                      borderRadius: '12px',
-                      borderColor: 'rgba(255,255,255,0.3)',
-                      color: 'common.white',
-                      width: { xs: '100%', sm: 'auto' },
-                      transition: 'all 0.3s ease',
+                      borderRadius: '10px',
+                      borderColor: 'rgba(255,255,255,0.25)',
+                      color: '#ffffff',
+                      fontSize: { xs: '0.9rem', sm: '1rem' },
+                      backgroundColor: 'rgba(255,255,255,0.03)',
                       '&:hover': {
-                        transform: 'translateY(-3px)',
-                        borderColor: '#FF6D00',
-                        backgroundColor: 'rgba(255, 109, 0, 0.15)',
-                        boxShadow: '0 6px 20px rgba(255, 109, 0, 0.25)',
-                      }
+                        transform: 'translateY(-2px)',
+                        borderColor: '#fb923c',
+                        backgroundColor: 'rgba(251, 146, 60, 0.1)',
+                      },
+                      transition: 'all 0.25s ease',
                     }}
                   >
                     Special Offers
                   </Button>
                 </Box>
 
+                {/* Features Row */}
                 <Box sx={{ 
                   display: 'flex', 
-                  gap: 2, 
+                  gap: 1.5, 
                   flexWrap: 'wrap',
                   justifyContent: { xs: 'center', md: 'flex-start' }
                 }}>
@@ -212,24 +212,20 @@ const Hero = () => {
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
-                        bgcolor: 'rgba(255,255,255,0.1)',
-                        px: 2,
-                        py: 1,
+                        bgcolor: 'rgba(255, 255, 255, 0.07)',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        px: { xs: 1.5, sm: 2 },
+                        py: 0.8,
                         borderRadius: '8px',
-                        backdropFilter: 'blur(4px)',
-                        minWidth: { xs: '40%', sm: 'auto' },
-                        flex: { xs: '1 0 auto', sm: '0 0 auto' },
-                        transition: 'transform 0.2s ease',
-                        '&:hover': {
-                          transform: 'translateY(-2px)',
-                          bgcolor: 'rgba(255,255,255,0.15)',
-                        }
+                        backdropFilter: 'blur(6px)',
+                        flex: { xs: '1 1 40%', sm: '0 0 auto' },
+                        justifyContent: { xs: 'center', sm: 'flex-start' }
                       }}
                     >
-                      <Typography variant="h6" sx={{ mr: 1, fontSize: { xs: '1rem', sm: '1.25rem' } }}>
+                      <Typography component="span" sx={{ mr: 1, fontSize: { xs: '0.9rem', sm: '1.1rem' } }}>
                         {feature.icon}
                       </Typography>
-                      <Typography variant="body2" color="common.white" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+                      <Typography variant="body2" sx={{ color: '#e5e7eb', fontSize: { xs: '0.75rem', sm: '0.85rem' }, fontWeight: 500 }}>
                         {feature.text}
                       </Typography>
                     </Box>
@@ -239,25 +235,23 @@ const Hero = () => {
             </Fade>
           </Grid>
 
+          {/* Desktop Right Image Side */}
           {!isMobile && (
-            <Grid item xs={12} md={6}>
+            <Grid item md={6}>
               <Fade in timeout={1000}>
                 <Box
                   sx={{
                     position: 'relative',
-                    borderRadius: '20px',
+                    borderRadius: '16px',
                     overflow: 'hidden',
-                    boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
                     border: '1px solid rgba(255,255,255,0.1)',
-                    height: { md: '55vh', lg: '65vh' },
-                    maxHeight: 550,
-                    width: '100%',
+                    height: { md: '480px', lg: '520px' },
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    transition: 'transform 0.3s ease-in-out',
-                    '&:hover': {
-                      transform: 'translateY(-5px)'
+                    '&:hover img': {
+                      transform: 'scale(1.03)',
                     }
                   }}
                 >
@@ -269,12 +263,7 @@ const Hero = () => {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      objectPosition: 'center',
-                      display: 'block',
                       transition: 'transform 0.5s ease',
-                      '&:hover': {
-                        transform: 'scale(1.03)'
-                      }
                     }}
                   />
                 </Box>
@@ -284,31 +273,29 @@ const Hero = () => {
         </Grid>
       </Container>
 
-      {/* Scroll indicator - Scrolls down to featured products */}
+      {/* Scroll indicator */}
       <IconButton
         onClick={scrollToFeatured}
         sx={{
           position: 'absolute',
-          bottom: 20,
+          bottom: 12,
           left: '50%',
           transform: 'translateX(-50%)',
-          color: 'common.white',
+          color: '#ffffff',
           zIndex: 2,
           animation: 'bounce 2s infinite',
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          backgroundColor: 'rgba(255, 255, 255, 0.08)',
           backdropFilter: 'blur(4px)',
+          p: 1,
           '&:hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-            transform: 'translateX(-50%) translateY(-5px)',
+            backgroundColor: 'rgba(255, 255, 255, 0.15)',
           },
-          transition: 'all 0.3s ease',
         }}
         aria-label="Scroll down to featured products"
       >
-        <ExpandMore fontSize="large" />
+        <ExpandMore />
       </IconButton>
 
-      {/* Add keyframes for bounce animation */}
       <style>
         {`
           @keyframes bounce {
@@ -316,10 +303,10 @@ const Hero = () => {
               transform: translateX(-50%) translateY(0);
             }
             40% {
-              transform: translateX(-50%) translateY(-10px);
+              transform: translateX(-50%) translateY(-6px);
             }
             60% {
-              transform: translateX(-50%) translateY(-5px);
+              transform: translateX(-50%) translateY(-3px);
             }
           }
         `}

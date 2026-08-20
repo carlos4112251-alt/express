@@ -41,7 +41,7 @@ function App() {
                 
               </Routes>
             </main>
-            <GoogleReviewPopup />
+            {/* <GoogleReviewPopup /> */}
             <Footer />
           </div>
         </Router>

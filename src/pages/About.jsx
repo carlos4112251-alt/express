@@ -12,10 +12,9 @@ import {
 import {
   LocalPharmacy,
   DeliveryDining,
-  Nature, // Replaces Eco
+  Nature,
   EmojiNature,
-  VerifiedUser,
-  Spa // Alternative plant icon
+  VerifiedUser
 } from '@mui/icons-material';
 
 const About = () => {
@@ -34,7 +33,7 @@ const About = () => {
       description: "Discreet and reliable service in under 60 minutes"
     },
     {
-      icon: <Nature fontSize="large" color="primary" />, // Changed from Eco to Nature
+      icon: <Nature fontSize="large" color="primary" />,
       title: "Sustainable Practices",
       description: "Eco-friendly packaging and cultivation methods"
     },
@@ -132,64 +131,11 @@ const About = () => {
           </Grid>
         </Container>
       </Box>
-{/* 
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography variant="h4" component="h2" align="center" gutterBottom sx={{ mb: 6, fontWeight: 600 }}>
-          Meet Our Team
-        </Typography>
-        <Grid container spacing={4} justifyContent="center">
-          {[
-            {
-              name: "Alex Johnson",
-              role: "Founder & CEO",
-              image: "/images/team1.PNG",
-              bio: "10+ years in cannabis industry advocacy"
-            },
-            {
-              name: "Maria Garcia",
-              role: "Head Grower",
-              image: "/images/team2.PNG",
-              bio: "Master horticulturist specializing in organic cultivation"
-            },
-            {
-              name: "Jamie Smith",
-              role: "Customer Care",
-              image: "/images/team3.PNG",
-              bio: "Dedicated to finding your perfect product match"
-            }
-          ].map((member, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Box sx={{ textAlign: 'center' }}>
-                <Avatar
-                  src={member.image}
-                  alt={member.name}
-                  sx={{ 
-                    width: 160, 
-                    height: 160, 
-                    margin: '0 auto 16px',
-                    border: '3px solid',
-                    borderColor: 'primary.main'
-                  }}
-                />
-                <Typography variant="h6" component="h3">
-                  {member.name}
-                </Typography>
-                <Typography variant="subtitle1" color="primary" gutterBottom>
-                  {member.role}
-                </Typography>
-                <Typography variant="body2">
-                  {member.bio}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Container> */}
 
       {/* Values Section */}
-      <Box sx={{ backgroundColor: '#e8ececff', color: 'white', py: 8 }}>
+      <Box sx={{ backgroundColor: '#1f2937', color: 'white', py: 8 }}>
         <Container maxWidth="md">
-          <Typography variant="h4" component="h2" align="center" gutterBottom sx={{ mb: 6, fontWeight: 600 }}>
+          <Typography variant="h4" component="h2" align="center" gutterBottom sx={{ mb: 6, fontWeight: 600, color: 'white' }}>
             Our Values
           </Typography>
           <Grid container spacing={4}>
@@ -202,8 +148,8 @@ const About = () => {
             ].map((value, index) => (
               <Grid item xs={12} sm={6} key={index}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <EmojiNature sx={{ mr: 2, fontSize: '2rem' }} />
-                  <Typography variant="h6">
+                  <EmojiNature sx={{ mr: 2, fontSize: '2rem', color: '#059669' }} />
+                  <Typography variant="h6" sx={{ color: 'white' }}>
                     {value}
                   </Typography>
                 </Box>
